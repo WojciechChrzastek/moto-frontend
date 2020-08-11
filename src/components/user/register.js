@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UserService from "../services/user.service";
+import UserService from "../../services/user.service";
 
 import UserAlert from '../../alert.js';
 
@@ -55,7 +55,7 @@ class Register extends Component {
                 <h1 className="RegisterHeader">Register</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>               
                     <div className="form-group" controlid="username">
-                        <label >Username</label>
+                        <label>Username</label>
                         <input 
                          className="form-control"
                          name="username"
