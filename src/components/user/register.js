@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import UserDataService from "../../services/user.service";
 
-// import UserAlert from '../../alert.js';
+import UserAlert from '../../alert.js';
 
 export default class Register extends Component {
 
     constructor(props) {
         super(props);
-        // this.alert = React.createRef();
+        this.alert = React.createRef();
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
@@ -20,7 +20,7 @@ export default class Register extends Component {
             password: "", 
             email: "",
 
-            submitted: false
+            // submitted: false
           };
     }
 
@@ -51,21 +51,41 @@ export default class Register extends Component {
 
         UserDataService.create(data)
         .then(response => {
-            this.setState({
-            id: response.data.id,
-            username: response.data.username,
-            password: response.data.password,
-            email: response.data.email,
-
-            submitted: true
-            });
-            console.log(response.data);
-        })        
-        .catch(e => {
-            console.log(e);
-        });    
+                this.showAlert("success", "User registered!", "You can now log in using your credentials.");
+                this.setState({
+                    id: response.data.id,
+                    username: response.data.username,
+                    password: response.data.password,
+                    email: response.data.email,
+                    // submitted: true
+                    });
+                this.newUser();
+        })
+        .catch(
+            error => {
+                if (error.response.status === 422) {
+                   this.showAlert("danger", "User/email already exists", "Please choose a different name/email.");
+                } else if (error.response.status === 406) {
+                   this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                } else {
+                   this.showAlert("danger", "User not registered!", "Something went wrong.");
+               }
+            }
+        )
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+    }
+    
+    showAlert(variant, heading, message) {
+        console.log(message);
+        this.alert.current.setVariant(variant);
+        this.alert.current.setHeading(heading);
+        this.alert.current.setMessage(message);
+        this.alert.current.setVisible(true);
+    }
+    
     newUser() {
         this.setState({
           id: null,
@@ -73,14 +93,14 @@ export default class Register extends Component {
           password: "",
           email: "",
 
-          submitted: false
+        //   submitted: false
         });
       }
 
     render() {
         return (
             <div className="Register">
-                {this.state.submitted ? (
+                {/* {this.state.submitted ? (
                     <div>
                         <h4>You submitted successfully!</h4>
                         <button
@@ -88,7 +108,7 @@ export default class Register extends Component {
                         Register
                         </button>
                     </div>
-                ) : (    
+                ) : (     */}
                     <div className="Register">       
                     <h1 className="RegisterHeader">Register</h1>
                     
@@ -139,94 +159,11 @@ export default class Register extends Component {
 
                         <button onClick={this.saveUser} className="btn btn-primary" type="submit" size="lg">Register</button>
                     </form>
+                    <UserAlert ref={this.alert}/>
                     </div>
-                )}
+                {/* )} */}
             </div>
         );
     }
+
 }
-
-    // handleSubmit = event => {
-    //     event.preventDefault();
-    //     this.registerUser(event.target.username.value, event.target.password.value, event.target.email.value);
-    // }
-
-    // registerUser(username, password, email) {
-    //     fetch('http://localhost:8080/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({
-    //             username: username,
-    //             password: password,
-    //             email: email,
-    //         })
-    //     })
-        // .then(function (response) {
-        //     if (response.status === 200) {
-        //         this.showAlert("success", "User registered!", "You can now log in using your credentials.");
-        //     } else if (response.status === 422) {
-        //         this.showAlert("danger", "User/email already exists", "Please choose a different name/email.");
-        //     } else if (response.status === 406) {
-        //         this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
-        //     } else {
-        //         this.showAlert("danger", "User not registered!", "Something went wrong.");
-        //     }
-        // }.bind(this)).catch(function (error) {
-        //     this.showAlert("danger", "Error", "Something went wrong.");
-        // }.bind(this));
-
-    // }
-
-    // showAlert(variant, heading, message) {
-    //     this.alert.current.setVariant(variant);
-    //     this.alert.current.setHeading(heading);
-    //     this.alert.current.setMessage(message);
-    //     this.alert.current.setVisible(true);
-    // }
-
-
-
-        //   <div className="submit-form">
-        //     {this.state.submitted ? (
-        //       <div>
-        //         <h4>You submitted successfully!</h4>
-        //         <button className="btn btn-success" onClick={this.newTutorial}>
-        //           Add
-        //         </button>
-        //       </div>
-        //     ) : (
-        //       <div>
-        //         <div className="form-group">
-        //           <label htmlFor="title">Title</label>
-        //           <input
-        //             type="text"
-        //             className="form-control"
-        //             id="title"
-        //             required
-        //             value={this.state.title}
-        //             onChange={this.onChangeTitle}
-        //             name="title"
-        //           />
-        //         </div>
-    
-        //         <div className="form-group">
-        //           <label htmlFor="description">Description</label>
-        //           <input
-        //             type="text"
-        //             className="form-control"
-        //             id="description"
-        //             required
-        //             value={this.state.description}
-        //             onChange={this.onChangeDescription}
-        //             name="description"
-        //           />
-        //         </div>
-    
-        //         <button onClick={this.saveTutorial} className="btn btn-success">
-        //           Submit
-        //         </button>
-        //       </div>
-        //     )}
