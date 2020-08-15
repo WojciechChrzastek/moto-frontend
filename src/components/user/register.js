@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import UserDataService from "../../services/user.service";
 
-import UserAlert from '../../alert.js';
+import '../../styles/style.css';
+
+import UserAlert from '../../user-alert.js';
 
 export default class Register extends Component {
 
@@ -85,7 +87,7 @@ export default class Register extends Component {
         this.alert.current.setMessage(message);
         this.alert.current.setVisible(true);
     }
-    
+
     newUser() {
         this.setState({
           id: null,
