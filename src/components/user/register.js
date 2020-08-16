@@ -111,7 +111,7 @@ export default class Register extends Component {
                         </button>
                     </div>
                 ) : (     */}
-                    <div className="Register">       
+                {/* <div className="Register">        */}
                     <h1 className="RegisterHeader">Register</h1>
                     
                     <form className="submit-form" onSubmit={this.handleSubmit}>               
@@ -158,11 +158,10 @@ export default class Register extends Component {
                                 Please provide a valid email address.
                             </small>
                         </div>
-
                         <button onClick={this.saveUser} className="btn btn-primary" type="submit" size="lg">Register</button>
                     </form>
                     <UserAlert ref={this.alert}/>
-                    </div>
+                {/* </div> */}
                 {/* )} */}
             </div>
         );
