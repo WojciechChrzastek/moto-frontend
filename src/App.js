@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import Register from './components/user/register.js'
+import UsersList from "./components/user/users-list";
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
                 </Link>
               </li> */}
               <a className="nav-item nav-link" href="/register">Register</a>
+              <a className="nav-item nav-link" href="/users-list">Users list</a>
             </div>
           </nav>
 
@@ -32,6 +34,7 @@ class App extends Component {
 
           <div className="container">
             <Route path="/register" component={Register}/>
+            <Route path="/users-list" component={UsersList}/>
           </div>
 
 
