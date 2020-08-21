@@ -5,6 +5,7 @@ import "./App.css";
 
 import Register from './components/user/register.js'
 import UsersList from "./components/user/users-list";
+import CarsList from "./components/car/cars-list";
 
 class App extends Component {
   render() {
@@ -21,6 +22,7 @@ class App extends Component {
               </li> */}
               <a className="nav-item nav-link" href="/register">Register</a>
               <a className="nav-item nav-link" href="/users-list">Users list</a>
+              <a className="nav-item nav-link" href="/cars-list">Cars list</a>
             </div>
           </nav>
 
@@ -35,6 +37,7 @@ class App extends Component {
           <div className="container">
             <Route path="/register" component={Register}/>
             <Route path="/users-list" component={UsersList}/>
+            <Route path="/cars-list" component={CarsList}/>
           </div>
 
 
