@@ -131,8 +131,11 @@ export default class CarsList extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                {cars && cars.map((car, key) => (
-                <tr key={key} onClick={() => this.setActiveCar(car, key)}>
+                {cars && cars.map((car, index) => (
+                <tr 
+                className={(index === currentIndex ? "table-primary" : "")}
+                index={index} onClick={() => this.setActiveCar(car, index)}
+                >
                     <td>{car.id}</td>
                     <td>{car.brandname}</td>
                     <td>{car.modelname}</td>
@@ -171,12 +174,19 @@ export default class CarsList extends Component {
                     <strong>Year:</strong>
                     </label>{" "}
                     {currentCar.manufactureyear}
-                </div>  
+                </div>
+                <div>  
                 <Link to={"/cars/" + currentCar.id}>
-                <button className="btn btn-sm btn-info">
+                <button className="btn btn-sm btn-info mr-3">
                 Edit
                 </button>
                 </Link>
+                <Link to={"/cars/" + currentCar.id}>
+                <button className="btn btn-sm btn-danger">
+                Delete
+                </button>
+                </Link>
+                </div>
             </div>
             ) : (
             <div>
