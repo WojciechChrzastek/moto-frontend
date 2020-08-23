@@ -19,67 +19,64 @@ export default class RegisterComponent extends Component {
         this.state = {
             id: null,
             username: "",
-            password: "", 
+            password: "",
             email: "",
-
-            // submitted: false
-          };
+        };
     }
 
     onChangeUsername(e) {
         this.setState({
-          username: e.target.value
+            username: e.target.value
         });
-      }
+    }
 
     onChangePassword(e) {
         this.setState({
-          password: e.target.value
+            password: e.target.value
         });
-      }
+    }
 
-      onChangeEmail(e) {
+    onChangeEmail(e) {
         this.setState({
-          email: e.target.value
+            email: e.target.value
         });
-      }
+    }
 
     saveUser() {
         var data = {
-          username: this.state.username,
-          password: this.state.password,
-          email: this.state.email
+            username: this.state.username,
+            password: this.state.password,
+            email: this.state.email
         };
 
         UserDataService.create(data)
-        .then(response => {
+            .then(response => {
                 this.showAlert("success", "User registered!", "You can now log in using your credentials.");
                 this.setState({
                     id: response.data.id,
                     username: response.data.username,
                     password: response.data.password,
                     email: response.data.email,
-                    // submitted: true
-                    });
+                });
                 this.newUser();
-        })
-        .catch(
-            error => {
-                if (error.response.status === 422) {
-                   this.showAlert("danger", "User/email already exists", "Please choose a different name/email.");
-                } else if (error.response.status === 406) {
-                   this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
-                } else {
-                   this.showAlert("danger", "User not registered!", "Something went wrong.");
-               }
-            }
-        )
+            })
+            .catch(
+                error => {
+                    if (error.response.status === 422) {
+                        this.showAlert("danger", "User/email already exists", "Please choose a different name/email.");
+                    } else if (error.response.status === 406) {
+                        this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                    } else {
+                        this.showAlert("danger", "User not registered!", "Something went wrong.");
+                    }
+                }
+            )
     }
 
     handleSubmit = event => {
         event.preventDefault();
     }
-    
+
     showAlert(variant, heading, message) {
         console.log(message);
         this.alert.current.setVariant(variant);
@@ -90,35 +87,22 @@ export default class RegisterComponent extends Component {
 
     newUser() {
         this.setState({
-          id: null,
-          username: "",
-          password: "",
-          email: "",
-
-        //   submitted: false
+            id: null,
+            username: "",
+            password: "",
+            email: "",
         });
-      }
+    }
 
     render() {
         return (
             <div className="Register">
-                {/* {this.state.submitted ? (
-                    <div>
-                        <h4>You submitted successfully!</h4>
-                        <button
-                        className="btn btn-success" onClick={this.newUser}>
-                        RegisterComponent
-                        </button>
-                    </div>
-                ) : (     */}
-                {/* <div className="RegisterComponent">        */}
-                    <h1 className="RegisterHeader">RegisterComponent</h1>
-                    
-                    <form className="submit-form" onSubmit={this.handleSubmit}>               
-                        
-                        <div className="form-group" controlid="username">
-                            <label htmlFor="username">Username</label>
-                            <input 
+                <h1 className="RegisterHeader">Register</h1>
+                <form className="submit-form" onSubmit={this.handleSubmit}>
+
+                    <div className="form-group" controlid="username">
+                        <label htmlFor="username">Username</label>
+                        <input
                             className="form-control"
                             name="username"
                             id="username"
@@ -127,12 +111,12 @@ export default class RegisterComponent extends Component {
                             autoFocus
                             required
                             value={this.state.username}
-                            onChange={this.onChangeUsername}/> 
-                        </div>
+                            onChange={this.onChangeUsername}/>
+                    </div>
 
-                        <div className="form-group" controlid="password">
-                            <label htmlFor="password">Password</label>
-                            <input
+                    <div className="form-group" controlid="password">
+                        <label htmlFor="password">Password</label>
+                        <input
                             className="form-control"
                             name="password"
                             id="password"
@@ -141,11 +125,11 @@ export default class RegisterComponent extends Component {
                             required
                             value={this.state.password}
                             onChange={this.onChangePassword}/>
-                        </div>
+                    </div>
 
-                        <div className="form-group" controlid="email">
-                            <label htmlFor="email">Email</label>
-                            <input
+                    <div className="form-group" controlid="email">
+                        <label htmlFor="email">Email</label>
+                        <input
                             className="form-control"
                             name="email"
                             id="email"
@@ -154,15 +138,19 @@ export default class RegisterComponent extends Component {
                             required
                             value={this.state.email}
                             onChange={this.onChangeEmail}/>
-                            <small className="form-text text-muted">
-                                Please provide a valid email address.
-                            </small>
-                        </div>
-                        <button onClick={this.saveUser} className="btn btn-primary" type="submit" size="lg">RegisterComponent</button>
-                    </form>
-                    <UserAlert ref={this.alert}/>
-                {/* </div> */}
-                {/* )} */}
+                        <small className="form-text text-muted">
+                            Please provide a valid email address.
+                        </small>
+                    </div>
+
+                    <button
+                        onClick={this.saveUser}
+                        className="btn btn-primary"
+                        type="submit"
+                        size="lg">Register
+                    </button>
+                </form>
+                <UserAlert ref={this.alert}/>
             </div>
         );
     }
