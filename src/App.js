@@ -6,6 +6,7 @@ import "./App.css";
 import Register from './components/user/register.js'
 import UsersList from "./components/user/users-list";
 import CarsList from "./components/car/cars-list";
+import Car from "./components/car/car.component";
 
 class App extends Component {
   render() {
@@ -38,6 +39,7 @@ class App extends Component {
             <Route path="/register" component={Register}/>
             <Route path="/users-list" component={UsersList}/>
             <Route path="/cars-list" component={CarsList}/>
+            <Route path="/cars/:id" component={Car} />
           </div>
 
 
