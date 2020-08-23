@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import UserDataSerice from "../../services/user.service";
 import { Link } from "react-router-dom";
 
-export default class UsersList extends Component {
+export default class UsersListComponent extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchName = this.onChangeSearchName.bind(this);

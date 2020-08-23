@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import Register from './components/user/register.js'
-import UsersList from "./components/user/users-list";
-import CarsList from "./components/car/cars-list";
+import RegisterComponent from './components/user/register.component.js'
+import UsersListComponent from "./components/user/users-list.component";
+import CarsListComponent from "./components/car/cars-list.component";
 import Car from "./components/car/car.component";
 
 class App extends Component {
@@ -36,9 +36,9 @@ class App extends Component {
           </div> */}
 
           <div className="container">
-            <Route path="/register" component={Register}/>
-            <Route path="/users-list" component={UsersList}/>
-            <Route path="/cars-list" component={CarsList}/>
+            <Route path="/register" component={RegisterComponent}/>
+            <Route path="/users-list" component={UsersListComponent}/>
+            <Route path="/cars-list" component={CarsListComponent}/>
             <Route path="/cars/:id" component={Car} />
           </div>
 

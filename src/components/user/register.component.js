@@ -5,7 +5,7 @@ import '../../styles/style.css';
 
 import UserAlert from '../../user-alert.js';
 
-export default class Register extends Component {
+export default class RegisterComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -107,12 +107,12 @@ export default class Register extends Component {
                         <h4>You submitted successfully!</h4>
                         <button
                         className="btn btn-success" onClick={this.newUser}>
-                        Register
+                        RegisterComponent
                         </button>
                     </div>
                 ) : (     */}
-                {/* <div className="Register">        */}
-                    <h1 className="RegisterHeader">Register</h1>
+                {/* <div className="RegisterComponent">        */}
+                    <h1 className="RegisterHeader">RegisterComponent</h1>
                     
                     <form className="submit-form" onSubmit={this.handleSubmit}>               
                         
@@ -158,7 +158,7 @@ export default class Register extends Component {
                                 Please provide a valid email address.
                             </small>
                         </div>
-                        <button onClick={this.saveUser} className="btn btn-primary" type="submit" size="lg">Register</button>
+                        <button onClick={this.saveUser} className="btn btn-primary" type="submit" size="lg">RegisterComponent</button>
                     </form>
                     <UserAlert ref={this.alert}/>
                 {/* </div> */}

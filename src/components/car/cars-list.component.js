@@ -3,7 +3,7 @@ import CarDataService from "../../services/car.service";
 import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
-export default class CarsList extends Component {
+export default class CarsListComponent extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchName = this.onChangeSearchName.bind(this);
