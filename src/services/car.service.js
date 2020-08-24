@@ -26,7 +26,7 @@ class CarDataService {
   }
 
   findByBrand(brand) {
-    return http.get(`/cars?brand=${brand}`);
+    return http.get(`/cars?brandname=${brand}`);
   }
 
 }

@@ -6,18 +6,18 @@ import Table from "react-bootstrap/Table";
 export default class CarsListComponent extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchName = this.onChangeSearchName.bind(this);
+    this.onChangeSearchBrand = this.onChangeSearchBrand.bind(this);
     this.retrieveCars = this.retrieveCars.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveCar = this.setActiveCar.bind(this);
     this.removeAllCars = this.removeAllCars.bind(this);
-    this.searchCar = this.searchCar.bind(this);
+    this.searchBrand = this.searchBrand.bind(this);
 
     this.state = {
       cars: [],
       currentCar: null,
       currentIndex: -1,
-      searchName: "",
+      searchBrand: "",
       data: [],
     };
   }
@@ -26,11 +26,11 @@ export default class CarsListComponent extends Component {
     this.retrieveCars();
   }
 
-  onChangeSearchName(e) {
-    const searchTitle = e.target.value;
+  onChangeSearchBrand(e) {
+    const searchBrand = e.target.value;
 
     this.setState({
-      searchTitle: searchTitle
+      searchBrand: searchBrand
     });
   }
 
@@ -73,8 +73,8 @@ export default class CarsListComponent extends Component {
       });
   }
 
-  searchCar() {
-    CarDataService.findByTitle(this.state.searchTitle)
+  searchBrand() {
+    CarDataService.findByBrand(this.state.searchBrand)
       .then(response => {
         this.setState({
           cars: response.data
@@ -92,24 +92,24 @@ export default class CarsListComponent extends Component {
 };
 
   render() {
-    const { searchTitle, cars, currentCar, currentIndex } = this.state;
+    const { searchBrand, cars, currentCar, currentIndex } = this.state;
 
     return (
-    <div className="list row">
+    <div className="list row search-bar">
         <div className="col-md-8">
             <div className="input-group mb-3">
             <input
               type="text"
               className="form-control"
-              placeholder="Search by brandname"
-              value={searchTitle}
-              onChange={this.onChangeSearchName}
+              placeholder="Type in brand name"
+              value={searchBrand}
+              onChange={this.onChangeSearchBrand}
             />
             <div className="input-group-append">
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchCar}
+                onClick={this.searchBrand}
               >
                 Search
               </button>

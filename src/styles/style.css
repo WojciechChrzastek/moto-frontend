@@ -2,6 +2,10 @@
     padding: 20px 0px 20px 0px;
 }
 
+.search-bar {
+    padding: 20px 0px 20px 0px;
+}
+
 .Register Form, .edit-car-form{
     margin: 0 auto;
     max-width: 320px;
