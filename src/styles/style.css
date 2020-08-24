@@ -1,22 +1,18 @@
-.Register {
-    padding: 20px 0px 20px 0px;
+.Register, .AddCar, .search-bar {
+    padding: 20px 0 20px 0;
 }
 
-.search-bar {
-    padding: 20px 0px 20px 0px;
-}
-
-.Register Form, .edit-car-form{
+.Register Form, .edit-car-form, .AddCar Form{
     margin: 0 auto;
     max-width: 320px;
 }
 
-.Register .btn {
+.Register .btn, .AddCar .btn{
     display: block;
     width: 100%;
 }
 
-.RegisterHeader, .CarHeader{
+.RegisterHeader, .CarHeader, .AddCarHeader{
     margin: 0 auto;
     max-width: 320px;
     padding: 0 0 20px;
