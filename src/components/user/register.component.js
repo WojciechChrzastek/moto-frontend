@@ -43,7 +43,7 @@ export default class RegisterComponent extends Component {
     }
 
     saveUser() {
-        var data = {
+        const data = {
             username: this.state.username,
             password: this.state.password,
             email: this.state.email
@@ -100,7 +100,7 @@ export default class RegisterComponent extends Component {
                 <h1 className="RegisterHeader">Register</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>
 
-                    <div className="form-group" controlid="username">
+                    <div className="form-group" id="username">
                         <label htmlFor="username">Username</label>
                         <input
                             className="form-control"
@@ -114,7 +114,7 @@ export default class RegisterComponent extends Component {
                             onChange={this.onChangeUsername}/>
                     </div>
 
-                    <div className="form-group" controlid="password">
+                    <div className="form-group" id="password">
                         <label htmlFor="password">Password</label>
                         <input
                             className="form-control"
@@ -127,7 +127,7 @@ export default class RegisterComponent extends Component {
                             onChange={this.onChangePassword}/>
                     </div>
 
-                    <div className="form-group" controlid="email">
+                    <div className="form-group" id="email">
                         <label htmlFor="email">Email</label>
                         <input
                             className="form-control"
@@ -147,7 +147,7 @@ export default class RegisterComponent extends Component {
                         onClick={this.saveUser}
                         className="btn btn-primary"
                         type="submit"
-                        size="lg">Register
+                    >Register
                     </button>
                 </form>
                 <UserAlert ref={this.alert}/>
