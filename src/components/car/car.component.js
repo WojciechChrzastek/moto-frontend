@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CarDataService from "../../services/car.service";
+import {Link} from "react-router-dom";
 
 export default class Car extends Component {
   constructor(props) {
@@ -164,20 +165,30 @@ export default class Car extends Component {
               </div>
             </form>
 
-            <button
-              className="btn btn-sm btn-danger mr-3"
-              onClick={this.deleteCar}
-            >
-              Delete
-            </button>
+            <div className="">
 
-            <button
-              type="submit"
-              className="btn btn-sm btn-info"
-              onClick={this.updateCar}
-            >
-              Update
-            </button>
+              <button
+                className="btn btn-sm btn-danger mr-3"
+                onClick={this.deleteCar}
+              >
+                Delete
+              </button>
+
+              <button
+                type="submit"
+                className="btn btn-sm btn-primary"
+                onClick={this.updateCar}
+              >
+                Update
+              </button>
+
+              <Link to="/cars-list">
+                <button className="btn btn-sm btn-info float-right">
+                  Return to cars list
+                </button>
+              </Link>
+
+            </div>
 
             <p>{this.state.message}</p>
 
