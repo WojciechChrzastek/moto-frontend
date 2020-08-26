@@ -124,7 +124,7 @@ export default class CarsListComponent extends Component {
                         <div className="input-group-prepend">
                             <span className="input-group-text" id="search-bar-text">Search by: </span>
                         </div>
-                        <select className="custom-select" id="search-bar-selector">
+                        <select className="custom-select col-md-2" id="search-bar-selector">
                             <option selected>Choose...</option>
                             <option value="1">Brand</option>
                             <option value="2">Model</option>
@@ -133,7 +133,7 @@ export default class CarsListComponent extends Component {
                             type="text"
                             className="form-control"
                             placeholder="Type in brand name"
-                            value={searchModel}
+                            value={searchBrand}
                             onChange={this.onChangeSearchBrand}
                         />
                         <div className="input-group-append">
