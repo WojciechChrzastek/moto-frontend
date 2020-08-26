@@ -88,6 +88,8 @@ export default class Car extends Component {
                         this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
                     } else if (error.response.status === 422) {
                         this.showAlert("danger", "Invalid manufacture year.", "Please provide a valid car manufacture year.");
+                    } else if (error.response.status === 404) {
+                        this.showAlert("danger", "Car not updated!", "There is no car of given ID.");
                     } else {
                         this.showAlert("danger", "Car not updated!", "Something went wrong.");
                     }
@@ -102,7 +104,7 @@ export default class Car extends Component {
             })
             .catch(
                 error => {
-                    if (error.response.status === 422) {
+                    if (error.response.status === 404) {
                         this.showAlert("danger", "Car not deleted!", "There is no car of given ID.");
                     } else {
                         this.showAlert("danger", "Car not deleted!", "Something went wrong.");
