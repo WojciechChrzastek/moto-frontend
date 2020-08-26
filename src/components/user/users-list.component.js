@@ -10,7 +10,7 @@ export default class UsersListComponent extends Component {
     this.refreshList = this.refreshList.bind(this);
     this.setActiveUser = this.setActiveUser.bind(this);
     this.removeAllUsers = this.removeAllUsers.bind(this);
-    this.searchUser = this.searchUser.bind(this);
+    this.searchUsername = this.searchUsername.bind(this);
 
     this.state = {
       users: [],
@@ -71,8 +71,8 @@ export default class UsersListComponent extends Component {
       });
   }
 
-  searchUser() {
-    UserDataSerice.findByTitle(this.state.searchTitle)
+  searchUsername() {
+    UserDataSerice.findByUsername(this.state.searchUsername)
       .then(response => {
         this.setState({
           users: response.data
@@ -102,7 +102,7 @@ export default class UsersListComponent extends Component {
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.searchUser}
+                onClick={this.searchUsername}
               >
                 Search
               </button>
