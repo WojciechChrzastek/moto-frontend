@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import CarDataService from "../../services/car.service";
 import {Link} from "react-router-dom";
+import UserAlert from "../../user-alert";
 
 export default class Car extends Component {
     constructor(props) {
         super(props);
+        this.alert = React.createRef();
         this.onChangeBrand = this.onChangeBrand.bind(this);
         this.onChangeModel = this.onChangeModel.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
@@ -18,8 +20,7 @@ export default class Car extends Component {
                 brandname: "",
                 modelname: "",
                 manufactureyear: "",
-            },
-            message: ""
+            }
         };
     }
 
@@ -79,28 +80,43 @@ export default class Car extends Component {
             this.state.currentCar
         )
             .then(response => {
-                console.log(response.data);
-                this.setState({
-                    message: "The car was updated successfully!"
-                });
+                this.showAlert("success", "Car updated!", "You can now check it in the cars list.");
             })
-            .catch(e => {
-                console.log(e);
-            });
+            .catch(
+                error => {
+                    if (error.response.status === 406) {
+                        this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                    } else if (error.response.status === 422) {
+                        this.showAlert("danger", "Invalid manufacture year.", "Please provide a valid car manufacture year.");
+                    } else {
+                        this.showAlert("danger", "Car not updated!", "Something went wrong.");
+                    }
+                }
+            )
     }
 
     deleteCar() {
         CarDataService.delete(this.state.currentCar.id)
             .then(response => {
-                console.log(response.data);
-                this.setState({
-                    message: "The car was deleted successfully!"
-                });
-                // this.props.history.push('/cars-list')
+                this.showAlert("success", "Car deleted!", "You will not see it in the cars list.");
             })
-            .catch(e => {
-                console.log(e);
-            });
+            .catch(
+                error => {
+                    if (error.response.status === 422) {
+                        this.showAlert("danger", "Car not deleted!", "There is no car of given ID.");
+                    } else {
+                        this.showAlert("danger", "Car not deleted!", "Something went wrong.");
+                    }
+                }
+            )
+    }
+
+    showAlert(variant, heading, message) {
+        console.log(message);
+        this.alert.current.setVariant(variant);
+        this.alert.current.setHeading(heading);
+        this.alert.current.setMessage(message);
+        this.alert.current.setVisible(true);
     }
 
     render() {
@@ -163,7 +179,7 @@ export default class Car extends Component {
                     </button>
                 </Link>
 
-                <p>{this.state.message}</p>
+                <UserAlert ref={this.alert}/>
 
             </div>
         );
