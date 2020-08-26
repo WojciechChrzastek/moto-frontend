@@ -33,6 +33,10 @@ class UserDataService {
     return http.get(`/users?email=${email}`);
   }
 
+  findByPassword(password) {
+    return http.get(`/users?password=${password}`);
+  }
+
 }
 
 export default new UserDataService();
