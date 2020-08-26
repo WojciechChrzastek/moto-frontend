@@ -49,7 +49,7 @@ export default class RegisterComponent extends Component {
             email: this.state.email
         };
 
-        UserDataService.create(data)
+        UserDataService.add(data)
             .then(response => {
                 this.showAlert("success", "User registered!", "You can now log in using your credentials.");
                 this.setState({
