@@ -1,9 +1,12 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import CarDataService from "../../services/car.service";
+
+import UserAlert from '../../user-alert.js';
 
 export default class AddCarComponent extends Component {
     constructor(props) {
         super(props);
+        this.alert = React.createRef();
         this.onChangeBrand = this.onChangeBrand.bind(this);
         this.onChangeModel = this.onChangeModel.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
@@ -11,13 +14,10 @@ export default class AddCarComponent extends Component {
         this.newCar = this.newCar.bind(this);
 
         this.state = {
-            currentCar: {
-                id: null,
-                brandname: "",
-                modelname: "",
-                manufactureyear: "",
-            },
-            message: ""
+            id: null,
+            brandname: "",
+            modelname: "",
+            manufactureyear: "",
         };
     }
 
@@ -48,16 +48,37 @@ export default class AddCarComponent extends Component {
 
         CarDataService.add(data)
             .then(response => {
+                this.showAlert("success", "Car added!", "You can now see it in the cars list.");
                 this.setState({
                     brandname: response.data.brandname,
                     modelname: response.data.modelname,
                     manufactureyear: response.data.manufactureyear
                 });
-                console.log(response.data);
+                this.newCar();
             })
-            .catch(e => {
-                console.log(e);
-            });
+            .catch(
+                error => {
+                    if (error.response.status === 406) {
+                        this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                    } else if (error.response.status === 422) {
+                        this.showAlert("danger", "Invalid manufacture year.", "Please provide a valid car manufacture year.");
+                    } else {
+                        this.showAlert("danger", "Car not added!", "Something went wrong.");
+                    }
+                }
+            )
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+    }
+
+    showAlert(variant, heading, message) {
+        console.log(message);
+        this.alert.current.setVariant(variant);
+        this.alert.current.setHeading(heading);
+        this.alert.current.setMessage(message);
+        this.alert.current.setVisible(true);
     }
 
     newCar() {
@@ -65,7 +86,7 @@ export default class AddCarComponent extends Component {
             id: null,
             brandname: "",
             modelname: "",
-            manufactureyear: 0
+            manufactureyear: ""
         });
     }
 
@@ -113,6 +134,9 @@ export default class AddCarComponent extends Component {
                             required
                             value={this.state.manufactureyear}
                             onChange={this.onChangeYear}/>
+                        <small className="form-text text-muted">
+                            Please provide a date in the range from 1901 to 2155.
+                        </small>
                     </div>
 
                     <button
@@ -122,6 +146,7 @@ export default class AddCarComponent extends Component {
                     >Add car
                     </button>
                 </form>
+                <UserAlert ref={this.alert}/>
 
             </div>
         );
