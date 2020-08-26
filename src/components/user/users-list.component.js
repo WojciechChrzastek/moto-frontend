@@ -6,12 +6,16 @@ import Table from "react-bootstrap/Table";
 export default class UsersListComponent extends Component {
     constructor(props) {
         super(props);
-        this.onChangeSearchName = this.onChangeSearchName.bind(this);
+        this.onChangeSearchUsername = this.onChangeSearchUsername.bind(this);
+        this.onChangeSearchEmail = this.onChangeSearchEmail.bind(this);
+        this.onChangeSearchPassword = this.onChangeSearchPassword.bind(this);
         this.retrieveUsers = this.retrieveUsers.bind(this);
         this.refreshList = this.refreshList.bind(this);
         this.setActiveUser = this.setActiveUser.bind(this);
         this.removeAllUsers = this.removeAllUsers.bind(this);
         this.searchUsername = this.searchUsername.bind(this);
+        this.searchEmail = this.searchEmail.bind(this);
+        this.searchPassword = this.searchPassword.bind(this);
 
         this.state = {
             users: [],
@@ -25,11 +29,27 @@ export default class UsersListComponent extends Component {
         this.retrieveUsers();
     }
 
-    onChangeSearchName(e) {
+    onChangeSearchUsername(e) {
         const searchTitle = e.target.value;
 
         this.setState({
             searchTitle: searchTitle
+        });
+    }
+
+    onChangeSearchEmail(e) {
+        const searchEmail = e.target.value;
+
+        this.setState({
+            searchEmail: searchEmail
+        });
+    }
+
+    onChangeSearchPassword(e) {
+        const searchPassword = e.target.value;
+
+        this.setState({
+            searchPassword: searchPassword
         });
     }
 
@@ -85,8 +105,34 @@ export default class UsersListComponent extends Component {
             });
     }
 
+    searchEmail() {
+        UserDataSerice.findByEmail(this.state.searchEmail)
+            .then(response => {
+                this.setState({
+                    users: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
+    searchPassword() {
+        UserDataSerice.findByPassword(this.state.searchPassword)
+            .then(response => {
+                this.setState({
+                    users: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+            });
+    }
+
     render() {
-        const {searchUsername, searchEmail, users, currentUser, currentIndex} = this.state;
+        const {searchUsername, searchEmail, searchPassword, users, currentUser, currentIndex} = this.state;
 
         return (
             <div className="list row users-list">
@@ -105,7 +151,7 @@ export default class UsersListComponent extends Component {
                         className="form-control"
                         placeholder="Type in username"
                         value={searchUsername}
-                        onChange={this.onChangeSearchName}
+                        onChange={this.onChangeSearchUsername}
                     />
                     <div className="input-group-append">
                         <button
