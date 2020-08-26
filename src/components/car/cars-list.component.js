@@ -118,33 +118,31 @@ export default class CarsListComponent extends Component {
         const {searchBrand, searchModel, cars, currentCar, currentIndex} = this.state;
 
         return (
-            <div className="list row search-bar">
-                <div className="col-md-8">
-                    <div className="input-group mb-3">
-                        <div className="input-group-prepend">
-                            <span className="input-group-text" id="search-bar-text">Search by: </span>
-                        </div>
-                        <select className="custom-select col-md-2" id="search-bar-selector">
-                            <option selected>Choose...</option>
-                            <option value="1">Brand</option>
-                            <option value="2">Model</option>
-                        </select>
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Type in brand name"
-                            value={searchBrand}
-                            onChange={this.onChangeSearchBrand}
-                        />
-                        <div className="input-group-append">
-                            <button
-                                className="btn btn-outline-primary"
-                                type="button"
-                                onClick={this.searchBrand}
-                            >
-                                Search
-                            </button>
-                        </div>
+            <div className="list row cars-list">
+                <div className="input-group mb-3 col-md-8">
+                    <div className="input-group-prepend">
+                        <span className="input-group-text" id="search-bar-text">Search by: </span>
+                    </div>
+                    <select className="custom-select col-md-2" id="search-bar-selector">
+                        <option selected>Choose...</option>
+                        <option value="1">Brand</option>
+                        <option value="2">Model</option>
+                    </select>
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Type in brand name"
+                        value={searchBrand}
+                        onChange={this.onChangeSearchBrand}
+                    />
+                    <div className="input-group-append">
+                        <button
+                            className="btn btn-outline-primary"
+                            type="button"
+                            onClick={this.searchBrand}
+                        >
+                            Search
+                        </button>
                     </div>
                 </div>
 
