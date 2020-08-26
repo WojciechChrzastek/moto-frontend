@@ -181,11 +181,11 @@ export default class CarsListComponent extends Component {
                 Edit
                 </button>
                 </Link>
-                <Link to={"/cars/" + currentCar.id}>
-                <button className="btn btn-sm btn-danger">
-                Delete
-                </button>
-                </Link>
+                {/*<Link to={"/cars/" + currentCar.id}>*/}
+                {/*<button className="btn btn-sm btn-danger">*/}
+                {/*Delete*/}
+                {/*</button>*/}
+                {/*</Link>*/}
                 </div>
             </div>
             ) : (
