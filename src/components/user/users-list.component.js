@@ -85,7 +85,7 @@ export default class UsersListComponent extends Component {
   }
 
   render() {
-    const { searchTitle, users, currentUser, currentIndex } = this.state;
+    const { searchUsername, searchEmail, users, currentUser, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -95,7 +95,7 @@ export default class UsersListComponent extends Component {
               type="text"
               className="form-control"
               placeholder="Search by username"
-              value={searchTitle}
+              value={searchUsername}
               onChange={this.onChangeSearchName}
             />
             <div className="input-group-append">
