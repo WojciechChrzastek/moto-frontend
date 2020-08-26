@@ -29,6 +29,10 @@ class CarDataService {
     return http.get(`/cars?brandname=${brand}`);
   }
 
+  findByModel(model) {
+    return http.get(`/cars?modelname=${model}`);
+  }
+
 }
 
 export default new CarDataService();
