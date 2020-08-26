@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import UserDataSerice from "../../services/user.service";
+import UserDataService from "../../services/user.service";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
 
@@ -54,7 +54,7 @@ export default class UsersListComponent extends Component {
     }
 
     retrieveUsers() {
-        UserDataSerice.getAll()
+        UserDataService.getAll()
             .then(response => {
                 this.setState({
                     users: response.data
@@ -82,7 +82,7 @@ export default class UsersListComponent extends Component {
     }
 
     removeAllUsers() {
-        UserDataSerice.deleteAll()
+        UserDataService.deleteAll()
             .then(response => {
                 console.log(response.data);
                 this.refreshList();
@@ -93,7 +93,7 @@ export default class UsersListComponent extends Component {
     }
 
     searchUsername() {
-        UserDataSerice.findByUsername(this.state.searchUsername)
+        UserDataService.findByUsername(this.state.searchUsername)
             .then(response => {
                 this.setState({
                     users: response.data
@@ -106,7 +106,7 @@ export default class UsersListComponent extends Component {
     }
 
     searchEmail() {
-        UserDataSerice.findByEmail(this.state.searchEmail)
+        UserDataService.findByEmail(this.state.searchEmail)
             .then(response => {
                 this.setState({
                     users: response.data
@@ -119,7 +119,7 @@ export default class UsersListComponent extends Component {
     }
 
     searchPassword() {
-        UserDataSerice.findByPassword(this.state.searchPassword)
+        UserDataService.findByPassword(this.state.searchPassword)
             .then(response => {
                 this.setState({
                     users: response.data
