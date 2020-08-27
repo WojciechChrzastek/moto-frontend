@@ -195,7 +195,7 @@ export default class UsersListComponent extends Component {
                     </Table>
 
                     <button
-                        className="btn btn-sm btn-danger"
+                        className="btn btn-sm btn-danger rmv-all-btn"
                         onClick={this.removeAllUsers}
                     >
                         Remove All Users

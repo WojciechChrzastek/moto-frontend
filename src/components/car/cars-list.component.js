@@ -175,14 +175,14 @@ export default class CarsListComponent extends Component {
                     </Table>
 
                     <button
-                        className="btn btn-sm btn-danger"
+                        className="btn btn-sm btn-danger rmv-all-btn"
                         onClick={this.removeAllCars}
                     >
                         Remove All Cars
                     </button>
                 </div>
 
-                <div className="col-md-4">
+                <div className="col-md-4 selected-car">
                     {currentCar ? (
                         <div>
                             <h4>Selected Car data</h4>
