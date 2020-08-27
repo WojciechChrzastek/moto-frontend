@@ -126,7 +126,7 @@ export default class User extends Component {
 
         return (
             <div className="edit-user-form">
-                <h1 className="UserHeader">Car</h1>
+                <h1 className="UserHeader">User</h1>
                 <form>
                     <div className="form-group">
                         <label htmlFor="brand">Username</label>
