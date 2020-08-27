@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import RegisterComponent from './components/user/register.component.js'
+import User from './components/user/user.component.js'
 import UsersListComponent from "./components/user/users-list.component";
 import CarsListComponent from "./components/car/cars-list.component";
 import Car from "./components/car/car.component";
@@ -30,6 +31,7 @@ export default class App extends Component {
                     <Route path="/cars-list" component={CarsListComponent}/>
                     <Route path="/add-car" component={AddCarComponent}/>
                     <Route path="/cars/:id" component={Car}/>
+                    <Route path="/users/:id" component={User}/>
                 </div>
 
             </Router>
