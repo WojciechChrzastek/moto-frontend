@@ -16,11 +16,11 @@ export default class CarsListComponent extends Component {
         this.searchModel = this.searchModel.bind(this);
 
         this.state = {
-            cars: [],
             currentCar: null,
             currentIndex: -1,
             searchBrand: "",
-            data: [],
+            searchModel: "",
+            data: []
         };
     }
 
@@ -124,9 +124,9 @@ export default class CarsListComponent extends Component {
                         <span className="input-group-text" id="search-bar-text">Search by: </span>
                     </div>
                     <select className="custom-select col-md-2" id="search-bar-selector">
-                        <option selected>Choose...</option>
+                        {/*<option selected>Choose...</option>*/}
                         <option value="1">Brand</option>
-                        <option value="2">Model</option>
+                        {/*<option value="2">Model</option>*/}
                     </select>
                     <input
                         type="text"

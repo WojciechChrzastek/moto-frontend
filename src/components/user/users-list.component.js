@@ -18,10 +18,12 @@ export default class UsersListComponent extends Component {
         this.searchPassword = this.searchPassword.bind(this);
 
         this.state = {
-            users: [],
             currentUser: null,
             currentIndex: -1,
-            searchName: ""
+            searchUsername: "",
+            searchEmail: "",
+            searchPassword: "",
+            data: []
         };
     }
 
@@ -30,10 +32,10 @@ export default class UsersListComponent extends Component {
     }
 
     onChangeSearchUsername(e) {
-        const searchTitle = e.target.value;
+        const searchUsername = e.target.value;
 
         this.setState({
-            searchTitle: searchTitle
+            searchUsername: searchUsername
         });
     }
 
@@ -141,10 +143,10 @@ export default class UsersListComponent extends Component {
                         <span className="input-group-text" id="search-bar-text">Search by: </span>
                     </div>
                     <select className="custom-select col-md-2" id="search-bar-selector">
-                        <option selected>Choose...</option>
+                        {/*<option selected>Choose...</option>*/}
                         <option value="1">Username</option>
-                        <option value="2">Email</option>
-                        <option value="3">Password</option>
+                        {/*<option value="2">Email</option>*/}
+                        {/*<option value="3">Password</option>*/}
                     </select>
                     <input
                         type="text"
