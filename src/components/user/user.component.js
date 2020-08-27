@@ -89,7 +89,7 @@ export default class User extends Component {
                     } else if (error.response.status === 422) {
                         this.showAlert("danger", "Invalid email format.", "Please provide a valid email.");
                     } else if (error.response.status === 404) {
-                        this.showAlert("danger", "User not updated!", "There is no user of given ID.");
+                        this.showAlert("danger", "User not updated!", "Selected user has not been found.");
                     } else {
                         this.showAlert("danger", "User not updated!", "Something went wrong.");
                     }
@@ -105,7 +105,7 @@ export default class User extends Component {
             .catch(
                 error => {
                     if (error.response.status === 404) {
-                        this.showAlert("danger", "User not deleted!", "There is no user of given ID.");
+                        this.showAlert("danger", "User not deleted!", "Selected user has not been found.");
                     } else {
                         this.showAlert("danger", "User not deleted!", "Something went wrong.");
                     }
