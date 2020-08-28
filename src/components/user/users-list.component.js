@@ -2,10 +2,12 @@ import React, {Component} from "react";
 import UserDataService from "../../services/user.service";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import UserAlert from "../../user-alert";
 
 export default class UsersListComponent extends Component {
     constructor(props) {
         super(props);
+        this.alert = React.createRef();
         this.onChangeSearchUsername = this.onChangeSearchUsername.bind(this);
         this.onChangeSearchEmail = this.onChangeSearchEmail.bind(this);
         this.onChangeSearchPassword = this.onChangeSearchPassword.bind(this);
@@ -88,10 +90,13 @@ export default class UsersListComponent extends Component {
             .then(response => {
                 console.log(response.data);
                 this.refreshList();
+                this.showAlert("success", "All users deleted!", "The users list is empty now.");
             })
-            .catch(e => {
-                console.log(e);
-            });
+            .catch(error => {
+                    console.log(error);
+                    this.showAlert("danger", "Users not deleted!", "Something went wrong.");
+                }
+            )
     }
 
     searchUsername() {
@@ -131,6 +136,14 @@ export default class UsersListComponent extends Component {
             .catch(e => {
                 console.log(e);
             });
+    }
+
+    showAlert(variant, heading, message) {
+        console.log(message);
+        this.alert.current.setVariant(variant);
+        this.alert.current.setHeading(heading);
+        this.alert.current.setMessage(message);
+        this.alert.current.setVisible(true);
     }
 
     render() {
@@ -200,6 +213,9 @@ export default class UsersListComponent extends Component {
                     >
                         Remove All Users
                     </button>
+
+                    <UserAlert ref={this.alert}/>
+
                 </div>
 
                 <div className="col-md-4">
