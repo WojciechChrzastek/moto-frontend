@@ -90,6 +90,8 @@ export default class Car extends Component {
                         this.showAlert("danger", "Invalid manufacture year.", "Please provide a valid car manufacture year.");
                     } else if (error.response.status === 404) {
                         this.showAlert("danger", "Car not updated!", "There is no car of given ID.");
+                    } else if (error.response.status === 409) {
+                        this.showAlert("danger", "Car not added!", "The car already exists in the database.");
                     } else {
                         this.showAlert("danger", "Car not updated!", "Something went wrong.");
                     }
