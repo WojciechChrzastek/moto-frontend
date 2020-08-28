@@ -13,6 +13,10 @@ class UserDataService {
     return http.post("/users", data);
   }
 
+  login(data) {
+    return http.post("/login", data);
+  }
+
   update(id, data) {
     return http.put(`/users/${id}`, data);
   }
