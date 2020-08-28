@@ -90,6 +90,8 @@ export default class User extends Component {
                         this.showAlert("danger", "Invalid email format.", "Please provide a valid email.");
                     } else if (error.response.status === 404) {
                         this.showAlert("danger", "User not updated!", "Selected user has not been found.");
+                    } else if (error.response.status === 409) {
+                        this.showAlert("danger", "User not registered!", "User with this username/email already exists.");
                     } else {
                         this.showAlert("danger", "User not updated!", "Something went wrong.");
                     }
