@@ -129,7 +129,7 @@ export default class AddCarComponent extends Component {
                             className="form-control"
                             name="manufactureyear"
                             id="manufactureyear"
-                            type="text"
+                            type="number" min="1901" max="2155" step="1"
                             placeholder="Enter manufacture year"
                             required
                             value={this.state.manufactureyear}
