@@ -94,7 +94,11 @@ export default class UsersListComponent extends Component {
             })
             .catch(error => {
                     console.log(error);
-                    this.showAlert("danger", "Users not deleted!", "Something went wrong.");
+                    if (error.response.status === 404) {
+                        this.showAlert("danger", "Users not deleted!", "Users list is already empty.");
+                    } else {
+                        this.showAlert("danger", "Users not deleted!", "Something went wrong.");
+                    }
                 }
             )
     }

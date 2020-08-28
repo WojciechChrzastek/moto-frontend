@@ -83,7 +83,11 @@ export default class CarsListComponent extends Component {
             })
             .catch(error => {
                     console.log(error);
-                    this.showAlert("danger", "Cars not deleted!", "Something went wrong.");
+                    if (error.response.status === 404) {
+                        this.showAlert("danger", "Cars not deleted!", "Cars list is already empty.");
+                    } else {
+                        this.showAlert("danger", "Cars not deleted!", "Something went wrong.");
+                    }
                 }
             )
     }
