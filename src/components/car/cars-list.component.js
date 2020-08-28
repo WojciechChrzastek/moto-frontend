@@ -11,7 +11,7 @@ export default class CarsListComponent extends Component {
         this.retrieveCars = this.retrieveCars.bind(this);
         this.refreshList = this.refreshList.bind(this);
         this.setActiveCar = this.setActiveCar.bind(this);
-        this.removeAllCars = this.removeAllCars.bind(this);
+        this.deleteAllCars = this.deleteAllCars.bind(this);
         this.searchBrand = this.searchBrand.bind(this);
         this.searchModel = this.searchModel.bind(this);
 
@@ -72,7 +72,7 @@ export default class CarsListComponent extends Component {
         });
     }
 
-    removeAllCars() {
+    deleteAllCars() {
         CarDataService.deleteAll()
             .then(response => {
                 console.log(response.data);
@@ -176,7 +176,7 @@ export default class CarsListComponent extends Component {
 
                     <button
                         className="btn btn-sm btn-danger rmv-all-btn"
-                        onClick={this.removeAllCars}
+                        onClick={this.deleteAllCars}
                     >
                         Remove All Cars
                     </button>
