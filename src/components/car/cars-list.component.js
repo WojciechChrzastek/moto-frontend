@@ -2,10 +2,12 @@ import React, {Component} from "react";
 import CarDataService from "../../services/car.service";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
+import UserAlert from "../../user-alert";
 
 export default class CarsListComponent extends Component {
     constructor(props) {
         super(props);
+        this.alert = React.createRef();
         this.onChangeSearchBrand = this.onChangeSearchBrand.bind(this);
         this.onChangeSearchModel = this.onChangeSearchModel.bind(this);
         this.retrieveCars = this.retrieveCars.bind(this);
@@ -77,10 +79,13 @@ export default class CarsListComponent extends Component {
             .then(response => {
                 console.log(response.data);
                 this.refreshList();
+                this.showAlert("success", "All cars deleted!", "The cars list is empty now.");
             })
-            .catch(e => {
-                console.log(e);
-            });
+            .catch(error => {
+                    console.log(error);
+                    this.showAlert("danger", "Cars not deleted!", "Something went wrong.");
+                }
+            )
     }
 
     searchBrand() {
@@ -113,6 +118,14 @@ export default class CarsListComponent extends Component {
         const currentState = this.state.active;
         this.setState({active: !currentState});
     };
+
+    showAlert(variant, heading, message) {
+        console.log(message);
+        this.alert.current.setVariant(variant);
+        this.alert.current.setHeading(heading);
+        this.alert.current.setMessage(message);
+        this.alert.current.setVisible(true);
+    }
 
     render() {
         const {searchBrand, searchModel, cars, currentCar, currentIndex} = this.state;
@@ -180,6 +193,9 @@ export default class CarsListComponent extends Component {
                     >
                         Remove All Cars
                     </button>
+
+                    <UserAlert ref={this.alert}/>
+
                 </div>
 
                 <div className="col-md-4 selected-car">
