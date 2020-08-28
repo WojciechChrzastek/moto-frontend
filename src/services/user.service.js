@@ -1,46 +1,44 @@
 import http from "../http-common";
 
-class UserDataService {
-  getAll() {
-    return http.get("/users");
-  }
+export default class UserDataService {
+    getAll() {
+        return http.get("/users");
+    }
 
-  get(id) {
-    return http.get(`/users/${id}`);
-  }
+    get(id) {
+        return http.get(`/users/${id}`);
+    }
 
-  add(data) {
-    return http.post("/users", data);
-  }
+    add(data) {
+        return http.post("/users", data);
+    }
 
-  login(data) {
-    return http.post("/login", data);
-  }
+    login(data) {
+        return http.post("/login", data);
+    }
 
-  update(id, data) {
-    return http.put(`/users/${id}`, data);
-  }
+    update(id, data) {
+        return http.put(`/users/${id}`, data);
+    }
 
-  delete(id) {
-    return http.delete(`/users/${id}`);
-  }
+    delete(id) {
+        return http.delete(`/users/${id}`);
+    }
 
-  deleteAll() {
-    return http.delete(`/users`);
-  }
+    deleteAll() {
+        return http.delete(`/users`);
+    }
 
-  findByUsername(username) {
-    return http.get(`/users?username=${username}`);
-  }
+    findByUsername(username) {
+        return http.get(`/users?username=${username}`);
+    }
 
-  findByEmail(email) {
-    return http.get(`/users?email=${email}`);
-  }
+    findByEmail(email) {
+        return http.get(`/users?email=${email}`);
+    }
 
-  findByPassword(password) {
-    return http.get(`/users?password=${password}`);
-  }
+    findByPassword(password) {
+        return http.get(`/users?password=${password}`);
+    }
 
 }
-
-export default new UserDataService();
