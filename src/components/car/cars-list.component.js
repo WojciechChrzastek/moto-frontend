@@ -8,21 +8,20 @@ export default class CarsListComponent extends Component {
     constructor(props) {
         super(props);
         this.alert = React.createRef();
-        this.onChangeSearchBrand = this.onChangeSearchBrand.bind(this);
-        this.onChangeSearchModel = this.onChangeSearchModel.bind(this);
+        this.onChangeSearchBy = this.onChangeSearchBy.bind(this);
         this.retrieveCars = this.retrieveCars.bind(this);
         this.refreshList = this.refreshList.bind(this);
         this.setActiveCar = this.setActiveCar.bind(this);
         this.deleteAllCars = this.deleteAllCars.bind(this);
-        this.searchBrand = this.searchBrand.bind(this);
-        this.searchModel = this.searchModel.bind(this);
+        this.searchBy = this.searchBy.bind(this);
+        this.handleSearchByChange = this.handleSearchByChange.bind(this);
 
         this.state = {
             currentCar: null,
             currentIndex: -1,
-            searchBrand: "",
-            searchModel: "",
-            data: []
+            searchBy: "",
+            data: [],
+            searchByPlaceholder: "Type in brand name"
         };
     }
 
@@ -30,19 +29,11 @@ export default class CarsListComponent extends Component {
         this.retrieveCars();
     }
 
-    onChangeSearchBrand(e) {
-        const searchBrand = e.target.value;
+    onChangeSearchBy(e) {
+        const searchBy = e.target.value;
 
         this.setState({
-            searchBrand: searchBrand
-        });
-    }
-
-    onChangeSearchModel(e) {
-        const searchModel = e.target.value;
-
-        this.setState({
-            searchModel: searchModel
+            searchBy: searchBy
         });
     }
 
@@ -92,36 +83,34 @@ export default class CarsListComponent extends Component {
             )
     }
 
-    searchBrand() {
-        CarDataService.findByBrand(this.state.searchBrand)
-            .then(response => {
-                this.setState({
-                    cars: response.data
+    searchBy() {
+        this.state.searchByPlaceholder === "Type in brand name"
+            ? CarDataService.findByBrand(this.state.searchBy)
+                .then(response => {
+                    this.setState({
+                        cars: response.data
+                    });
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
+                })
+            : CarDataService.findByModel(this.state.searchBy)
+                .then(response => {
+                    this.setState({
+                        cars: response.data
+                    });
+                    console.log(response.data);
+                })
+                .catch(e => {
+                    console.log(e);
                 });
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-
-    searchModel() {
-        CarDataService.findByModel(this.state.searchModel)
-            .then(response => {
-                this.setState({
-                    cars: response.data
-                });
-                console.log(response.data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
     }
 
     toggleClass() {
         const currentState = this.state.active;
         this.setState({active: !currentState});
-    };
+    }
 
     showAlert(variant, heading, message) {
         console.log(message);
@@ -131,8 +120,12 @@ export default class CarsListComponent extends Component {
         this.alert.current.setVisible(true);
     }
 
+    handleSearchByChange(event) {
+        this.setState({searchByPlaceholder: event.target.value});
+    }
+
     render() {
-        const {searchBrand, searchModel, cars, currentCar, currentIndex} = this.state;
+        const {searchByPlaceholder, cars, currentCar, currentIndex} = this.state;
 
         return (
             <div className="list row cars-list">
@@ -140,23 +133,22 @@ export default class CarsListComponent extends Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text" id="search-bar-text">Search by: </span>
                     </div>
-                    <select className="custom-select col-md-2" id="search-bar-selector">
-                        {/*<option selected>Choose...</option>*/}
-                        <option value="1">Brand</option>
-                        {/*<option value="2">Model</option>*/}
+                    <select className="custom-select col-md-2" id="search-bar-selector"
+                            value={this.state.value} onChange={this.handleSearchByChange}>
+                        <option value="Type in brand name">Brand</option>
+                        <option value="Type in model name">Model</option>
                     </select>
                     <input
                         type="text"
                         className="form-control"
-                        placeholder="Type in brand name"
-                        value={searchBrand}
-                        onChange={this.onChangeSearchBrand}
+                        placeholder={searchByPlaceholder}
+                        onChange={this.onChangeSearchBy}
                     />
                     <div className="input-group-append">
                         <button
                             className="btn btn-outline-primary"
                             type="button"
-                            onClick={this.searchBrand}
+                            onClick={this.searchBy}
                         >
                             Search
                         </button>
