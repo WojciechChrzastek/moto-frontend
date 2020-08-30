@@ -84,6 +84,10 @@ export default class CarsListComponent extends Component {
     }
 
     searchBy() {
+        this.setState({
+            currentCar: null,
+            currentIndex: -1
+        });
         this.state.searchByPlaceholder === "Type in brand name"
             ? CarDataService.findByBrand(this.state.searchBy)
                 .then(response => {
