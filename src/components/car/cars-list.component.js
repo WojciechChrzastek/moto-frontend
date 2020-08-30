@@ -170,7 +170,7 @@ export default class CarsListComponent extends Component {
                         </thead>
                         <tbody>
                         {cars && cars.map((car, index) => (
-                            <tr
+                            <tr key={car.id}
                                 className={(index === currentIndex ? "table-info" : "")}
                                 index={index} onClick={() => this.setActiveCar(car, index)}
                             >
