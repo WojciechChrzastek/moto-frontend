@@ -21,7 +21,8 @@ export default class CarsListComponent extends Component {
             currentIndex: -1,
             searchBy: "",
             data: [],
-            searchByPlaceholder: "Type in brand name"
+            searchByPlaceholder: "Type in brand name",
+            foundCars: 1
         };
     }
 
@@ -84,6 +85,7 @@ export default class CarsListComponent extends Component {
     }
 
     searchBy() {
+        this.setState({foundCars: 1})
         this.setState({
             currentCar: null,
             currentIndex: -1
@@ -98,6 +100,12 @@ export default class CarsListComponent extends Component {
                 })
                 .catch(e => {
                     console.log(e);
+                    this.setState({foundCars: 0})
+                    if (e.response.status === 404) {
+                        this.showAlert("danger", "Cars not found!", "There is no car of given data.");
+                    } else {
+                        this.showAlert("danger", "Cars not found!", "Something went wrong.");
+                    }
                 })
             : CarDataService.findByModel(this.state.searchBy)
                 .then(response => {
@@ -108,6 +116,12 @@ export default class CarsListComponent extends Component {
                 })
                 .catch(e => {
                     console.log(e);
+                    this.setState({foundCars: 0})
+                    if (e.response.status === 404) {
+                        this.showAlert("danger", "Cars not found!", "There is no car of given data.");
+                    } else {
+                        this.showAlert("danger", "Cars not found!", "Something went wrong.");
+                    }
                 });
     }
 
@@ -160,85 +174,92 @@ export default class CarsListComponent extends Component {
                 </div>
 
                 <div className="col-md-8">
-
                     <h4>Cars List</h4>
-
-                    <Table bordered hover>
-                        <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Brand</th>
-                            <th>Model</th>
-                            <th>Year</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {cars && cars.map((car, index) => (
-                            <tr key={car.id}
-                                className={(index === currentIndex ? "table-info" : "")}
-                                index={index} onClick={() => this.setActiveCar(car, index)}
-                            >
-                                <td>{car.id}</td>
-                                <td>{car.brandname}</td>
-                                <td>{car.modelname}</td>
-                                <td>{car.manufactureyear}</td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </Table>
-
-                    <button
-                        className="btn btn-sm btn-danger rmv-all-btn"
-                        onClick={this.deleteAllCars}
-                    >
-                        Remove All Cars
-                    </button>
-
+                    {this.state.foundCars === 1 ?
+                        (
+                            <div>
+                                <Table bordered hover>
+                                    <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Brand</th>
+                                        <th>Model</th>
+                                        <th>Year</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {cars && cars.map((car, index) => (
+                                        <tr key={car.id}
+                                            className={(index === currentIndex ? "table-info" : "")}
+                                            onClick={() => this.setActiveCar(car, index)}
+                                        >
+                                            <td>{car.id}</td>
+                                            <td>{car.brandname}</td>
+                                            <td>{car.modelname}</td>
+                                            <td>{car.manufactureyear}</td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </Table>
+                                <button
+                                    className="btn btn-sm btn-danger rmv-all-btn"
+                                    onClick={this.deleteAllCars}
+                                >
+                                    Remove All Cars
+                                </button>
+                            </div>
+                        ) : <UserAlert ref={this.alert}/>
+                    }
                     <UserAlert ref={this.alert}/>
-
                 </div>
 
                 <div className="col-md-4 selected-car">
-                    {currentCar ? (
-                        <div>
-                            <h4>Selected Car data</h4>
+                    {currentCar ?
+                        (
                             <div>
-                                <label>
-                                    <strong>Brand:</strong>
-                                </label>{" "}
-                                {currentCar.brandname}
+                                <h4>Selected Car data</h4>
+                                <div>
+                                    <label>
+                                        <strong>Brand:</strong>
+                                    </label>{" "}
+                                    {currentCar.brandname}
+                                </div>
+                                <div>
+                                    <label>
+                                        <strong>Model:</strong>
+                                    </label>{" "}
+                                    {currentCar.modelname}
+                                </div>
+                                <div>
+                                    <label>
+                                        <strong>Year:</strong>
+                                    </label>{" "}
+                                    {currentCar.manufactureyear}
+                                </div>
+                                <div>
+                                    <Link to={"/cars/" + currentCar.id}>
+                                        <button className="btn btn-sm btn-info mr-3">
+                                            Edit
+                                        </button>
+                                    </Link>
+                                    {/*<Link to={"/cars/" + currentCar.id}>*/}
+                                    {/*<button className="btn btn-sm btn-danger">*/}
+                                    {/*Delete*/}
+                                    {/*</button>*/}
+                                    {/*</Link>*/}
+                                </div>
                             </div>
-                            <div>
-                                <label>
-                                    <strong>Model:</strong>
-                                </label>{" "}
-                                {currentCar.modelname}
-                            </div>
-                            <div>
-                                <label>
-                                    <strong>Year:</strong>
-                                </label>{" "}
-                                {currentCar.manufactureyear}
-                            </div>
-                            <div>
-                                <Link to={"/cars/" + currentCar.id}>
-                                    <button className="btn btn-sm btn-info mr-3">
-                                        Edit
-                                    </button>
-                                </Link>
-                                {/*<Link to={"/cars/" + currentCar.id}>*/}
-                                {/*<button className="btn btn-sm btn-danger">*/}
-                                {/*Delete*/}
-                                {/*</button>*/}
-                                {/*</Link>*/}
-                            </div>
-                        </div>
-                    ) : (
-                        <div>
-                            <br/>
-                            <p>Please click on a Car...</p>
-                        </div>
-                    )}
+                        ) :
+                        (
+                            this.state.foundCars === 1 ?
+                                <div>
+                                    <br/>
+                                    <p>Please click on a Car...</p>
+                                </div>
+                                :
+                                ""
+                        )
+                    }
                 </div>
             </div>
         );
