@@ -9,18 +9,18 @@ export default class CarsListComponent extends Component {
         super(props);
         this.alert = React.createRef();
         this.onChangeSearchBy = this.onChangeSearchBy.bind(this);
+        this.searchBy = this.searchBy.bind(this);
+        this.handleSearchByChange = this.handleSearchByChange.bind(this);
         this.retrieveCars = this.retrieveCars.bind(this);
         this.refreshList = this.refreshList.bind(this);
         this.setActiveCar = this.setActiveCar.bind(this);
         this.deleteAllCars = this.deleteAllCars.bind(this);
-        this.searchBy = this.searchBy.bind(this);
-        this.handleSearchByChange = this.handleSearchByChange.bind(this);
 
         this.state = {
+            data: [],
             currentCar: null,
             currentIndex: -1,
             searchBy: "",
-            data: [],
             searchByPlaceholder: "Type in brand name",
             foundCars: 1
         };
@@ -125,6 +125,10 @@ export default class CarsListComponent extends Component {
                 });
     }
 
+    handleSearchByChange(event) {
+        this.setState({searchByPlaceholder: event.target.value});
+    }
+
     toggleClass() {
         const currentState = this.state.active;
         this.setState({active: !currentState});
@@ -136,10 +140,6 @@ export default class CarsListComponent extends Component {
         this.alert.current.setHeading(heading);
         this.alert.current.setMessage(message);
         this.alert.current.setVisible(true);
-    }
-
-    handleSearchByChange(event) {
-        this.setState({searchByPlaceholder: event.target.value});
     }
 
     render() {
