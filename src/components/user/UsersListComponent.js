@@ -22,7 +22,8 @@ export default class UsersListComponent extends Component {
             currentIndex: -1,
             searchBy: "",
             searchByPlaceholder: "Type in username",
-            foundUsers: 1
+            searchByMethod: "username",
+            foundUsers: true
         };
     }
 
@@ -84,67 +85,69 @@ export default class UsersListComponent extends Component {
             )
     }
 
+    processResponse(response) {
+        response
+            .then(response => {
+                this.setState({
+                    foundUsers: true,
+                    cars: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+                this.setState({foundUsers: false})
+                if (e.response.status === 404) {
+                    this.showAlert("danger", "Users not found!", "There is no user of given data.");
+                } else {
+                    this.showAlert("danger", "Users not found!", "Something went wrong.");
+                }
+            });
+    }
+
     searchBy() {
-        this.setState({foundUsers: 1})
         this.setState({
             currentUser: null,
             currentIndex: -1
         });
-        this.state.searchByPlaceholder === "Type in username"
-            ? UserDataService.findByUsername(this.state.searchBy)
-                .then(response => {
-                    this.setState({
-                        users: response.data
-                    });
-                    console.log(response.data);
-                })
-                .catch(e => {
-                    console.log(e);
-                    this.setState({foundUsers: 0})
-                    if (e.response.status === 404) {
-                        this.showAlert("danger", "Users not found!", "There is no user of given data.");
-                    } else {
-                        this.showAlert("danger", "Users not found!", "Something went wrong.");
-                    }
-                })
-            : UserDataService.findByEmail(this.state.searchBy)
-                .then(response => {
-                    this.setState({
-                        users: response.data
-                    });
-                    console.log(response.data);
-                })
-                .catch(e => {
-                    console.log(e);
-                    this.setState({foundUsers: 0})
-                    if (e.response.status === 404) {
-                        this.showAlert("danger", "Users not found!", "There is no user of given data.");
-                    } else {
-                        this.showAlert("danger", "Users not found!", "Something went wrong.");
-                    }
-                });
-
-        // : UserDataService.findByPassword(this.state.searchBy)
-        //     .then(response => {
-        //         this.setState({
-        //             users: response.data
-        //         });
-        //         console.log(response.data);
-        //     })
-        //     .catch(e => {
-        //         console.log(e);
-        //         this.setState({foundUsers: 0})
-        //         if (e.response.status === 404) {
-        //             this.showAlert("danger", "Users not found!", "There is no user of given data.");
-        //         } else {
-        //             this.showAlert("danger", "Users not found!", "Something went wrong.");
-        //         }
-        //     });
-
+        switch (this.state.searchByMethod) {
+            case 'username':
+                this.processResponse(UserDataService.findByUsername(this.state.searchBy))
+                break;
+            case 'email':
+                this.processResponse(UserDataService.findByEmail(this.state.searchBy))
+                break;
+            case 'password':
+                this.processResponse(UserDataService.findByPassword(this.state.searchBy))
+                break;
+            default:
+                break;
+        }
     }
 
     handleSearchByChange(event) {
-        this.setState({searchByPlaceholder: event.target.value});
+        switch (event.target.value) {
+            case "username":
+                this.setState({
+                    searchByPlaceholder: "Type in username",
+                    searchByMethod: "username"
+                });
+                break;
+            case "email":
+                this.setState({
+                    searchByPlaceholder: "Type in email",
+                    searchByMethod: "email"
+                });
+                break;
+            case "password":
+                this.setState({
+                    searchByPlaceholder: "Type in password",
+                    searchByMethod: "password"
+                });
+                break;
+            default :
+                break;
+        }
     }
 
     toggleClass() {
@@ -171,9 +174,9 @@ export default class UsersListComponent extends Component {
                     </div>
                     <select className="custom-select col-md-2" id="search-bar-selector"
                             value={this.state.value} onChange={this.handleSearchByChange}>
-                        <option value="Type in username">Username</option>
-                        <option value="Type in email">Email</option>
-                        {/*<option value="3">Password</option>*/}
+                        <option value="username">Username</option>
+                        <option value="email">Email</option>
+                        <option value="password">Password</option>
                     </select>
                     <input
                         type="text"
@@ -195,7 +198,7 @@ export default class UsersListComponent extends Component {
                 <div className="col-md-8">
 
                     <h4>Users List</h4>
-                    {this.state.foundUsers === 1 ?
+                    {this.state.foundUsers === true ?
                         (
                             <div>
 
@@ -211,7 +214,7 @@ export default class UsersListComponent extends Component {
                                     <tbody>
                                     {users && users.map((user, index) => (
                                         <tr key={user.id}
-                                            className={(index === currentIndex ? "table-info" : "")}
+                                            className={(index === currentIndex ? "table-info" : null)}
                                             onClick={() => this.setActiveUser(user, index)}
                                         >
                                             <td>{user.id}</td>
@@ -274,13 +277,13 @@ export default class UsersListComponent extends Component {
                             </div>
                         ) :
                         (
-                            this.state.foundUsers === 1 ?
+                            this.state.foundUsers === true ?
                                 <div>
                                     <br/>
                                     <p>Please click on an User...</p>
                                 </div>
                                 :
-                                ""
+                                null
                         )
                     }
                 </div>
