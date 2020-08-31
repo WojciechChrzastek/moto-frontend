@@ -85,8 +85,8 @@ export default class CarsListComponent extends Component {
     }
 
     searchBy() {
-        this.setState({foundCars: 1})
         this.setState({
+            foundCars: 1,
             currentCar: null,
             currentIndex: -1
         });
