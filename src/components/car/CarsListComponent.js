@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import CarDataService from "../../services/CarDataService";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
-import UserAlertComponent from "../../UserAlertComponent";
+import UserAlertComponent from "../user-alert/UserAlertComponent";
 
 export default class CarsListComponent extends Component {
     constructor(props) {

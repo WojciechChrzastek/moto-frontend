@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import CarDataService from "../../services/CarDataService";
 
-import UserAlertComponent from '../../UserAlertComponent.js';
+import UserAlertComponent from '../user-alert/UserAlertComponent.js';
 
 export default class AddCarComponent extends Component {
     constructor(props) {

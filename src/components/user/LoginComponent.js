@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../../styles/style.css';
-import UserAlertComponent from '../../UserAlertComponent.js';
+import UserAlertComponent from '../user-alert/UserAlertComponent.js';
 import UserDataService from "../../services/UserDataService";
 
 export default class LoginComponent extends Component {

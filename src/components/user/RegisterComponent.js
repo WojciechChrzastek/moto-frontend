@@ -3,7 +3,7 @@ import UserDataService from "../../services/UserDataService";
 
 import '../../styles/style.css';
 
-import UserAlertComponent from '../../UserAlertComponent.js';
+import UserAlertComponent from '../user-alert/UserAlertComponent.js';
 
 export default class RegisterComponent extends Component {
 

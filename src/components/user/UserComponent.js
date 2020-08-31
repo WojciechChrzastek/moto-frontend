@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import UserDataService from "../../services/UserDataService";
 import {Link} from "react-router-dom";
-import UserAlertComponent from "../../UserAlertComponent";
+import UserAlertComponent from "../user-alert/UserAlertComponent";
 
 export default class UserComponent extends Component {
     constructor(props) {

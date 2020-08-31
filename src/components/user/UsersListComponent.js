@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import UserDataService from "../../services/UserDataService";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
-import UserAlertComponent from "../../UserAlertComponent";
+import UserAlertComponent from "../user-alert/UserAlertComponent";
 
 export default class UsersListComponent extends Component {
     constructor(props) {
