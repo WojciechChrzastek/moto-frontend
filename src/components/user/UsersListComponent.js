@@ -14,7 +14,7 @@ export default class UsersListComponent extends Component {
         this.retrieveUsers = this.retrieveUsers.bind(this);
         this.refreshList = this.refreshList.bind(this);
         this.setActiveUser = this.setActiveUser.bind(this);
-        this.removeAllUsers = this.removeAllUsers.bind(this);
+        this.deleteAllUsers = this.deleteAllUsers.bind(this);
 
         this.state = {
             data: [],
@@ -66,7 +66,7 @@ export default class UsersListComponent extends Component {
         });
     }
 
-    removeAllUsers() {
+    deleteAllUsers() {
         UserDataService.deleteAll()
             .then(response => {
                 console.log(response.data);
@@ -225,7 +225,7 @@ export default class UsersListComponent extends Component {
 
                                 <button
                                     className="btn btn-sm btn-danger rmv-all-btn"
-                                    onClick={this.removeAllUsers}
+                                    onClick={this.deleteAllUsers}
                                 >
                                     Remove All Users
                                 </button>
