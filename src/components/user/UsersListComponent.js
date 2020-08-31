@@ -90,7 +90,7 @@ export default class UsersListComponent extends Component {
             .then(response => {
                 this.setState({
                     foundUsers: true,
-                    cars: response.data
+                    users: response.data
                 });
                 console.log(response.data);
             })
@@ -196,12 +196,10 @@ export default class UsersListComponent extends Component {
                 </div>
 
                 <div className="col-md-8">
-
                     <h4>Users List</h4>
                     {this.state.foundUsers === true ?
                         (
                             <div>
-
                                 <Table bordered hover>
                                     <thead>
                                     <tr>
