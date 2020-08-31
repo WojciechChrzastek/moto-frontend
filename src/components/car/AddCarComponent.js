@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import CarDataService from "../../services/car.service";
+import CarDataService from "../../services/CarDataService";
 
-import UserAlert from '../../user-alert.js';
+import UserAlertComponent from '../../UserAlertComponent.js';
 
 export default class AddCarComponent extends Component {
     constructor(props) {
@@ -148,7 +148,7 @@ export default class AddCarComponent extends Component {
                     >Add car
                     </button>
                 </form>
-                <UserAlert ref={this.alert}/>
+                <UserAlertComponent ref={this.alert}/>
 
             </div>
         );

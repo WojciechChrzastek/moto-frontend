@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import UserDataService from "../../services/user.service";
+import UserDataService from "../../services/UserDataService";
 
 import '../../styles/style.css';
 
-import UserAlert from '../../user-alert.js';
+import UserAlertComponent from '../../UserAlertComponent.js';
 
 export default class RegisterComponent extends Component {
 
@@ -150,7 +150,7 @@ export default class RegisterComponent extends Component {
                     >Register
                     </button>
                 </form>
-                <UserAlert ref={this.alert}/>
+                <UserAlertComponent ref={this.alert}/>
             </div>
         );
     }

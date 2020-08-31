@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import CarDataService from "../../services/car.service";
+import CarDataService from "../../services/CarDataService";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
-import UserAlert from "../../user-alert";
+import UserAlertComponent from "../../UserAlertComponent";
 
 export default class CarsListComponent extends Component {
     constructor(props) {
@@ -220,9 +220,9 @@ export default class CarsListComponent extends Component {
                                     Remove All Cars
                                 </button>
                             </div>
-                        ) : <UserAlert ref={this.alert}/>
+                        ) : <UserAlertComponent ref={this.alert}/>
                     }
-                    <UserAlert ref={this.alert}/>
+                    <UserAlertComponent ref={this.alert}/>
                 </div>
 
                 <div className="col-md-4 selected-car">

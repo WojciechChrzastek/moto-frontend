@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import '../../styles/style.css';
-import UserAlert from '../../user-alert.js';
-import UserDataService from "../../services/user.service";
+import UserAlertComponent from '../../UserAlertComponent.js';
+import UserDataService from "../../services/UserDataService";
 
-export default class Login extends Component {
+export default class LoginComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -108,7 +108,7 @@ export default class Login extends Component {
                     >Login
                     </button>
                 </form>
-                <UserAlert ref={this.alert}/>
+                <UserAlertComponent ref={this.alert}/>
             </div>
         );
     }

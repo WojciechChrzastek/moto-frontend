@@ -3,13 +3,13 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
-import RegisterComponent from './components/user/register.component.js'
-import Login from './components/user/login.component.js'
-import User from './components/user/user.component.js'
-import UsersListComponent from "./components/user/users-list.component";
-import CarsListComponent from "./components/car/cars-list.component";
-import Car from "./components/car/car.component";
-import AddCarComponent from "./components/car/add-car.component";
+import RegisterComponent from './components/user/RegisterComponent.js'
+import Login from './components/user/LoginComponent.js'
+import User from './components/user/UserComponent.js'
+import UsersListComponent from "./components/user/UsersListComponent";
+import CarsListComponent from "./components/car/CarsListComponent";
+import Car from "./components/car/CarComponent";
+import AddCarComponent from "./components/car/AddCarComponent";
 
 export default class App extends Component {
     state = {username: "", isAuthenticated: false};

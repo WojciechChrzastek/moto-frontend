@@ -1,9 +1,9 @@
 import React, {Component} from "react";
-import CarDataService from "../../services/car.service";
+import CarDataService from "../../services/CarDataService";
 import {Link} from "react-router-dom";
-import UserAlert from "../../user-alert";
+import UserAlertComponent from "../../UserAlertComponent";
 
-export default class Car extends Component {
+export default class CarComponent extends Component {
     constructor(props) {
         super(props);
         this.alert = React.createRef();
@@ -183,7 +183,7 @@ export default class Car extends Component {
                     </button>
                 </Link>
 
-                <UserAlert ref={this.alert}/>
+                <UserAlertComponent ref={this.alert}/>
 
             </div>
         );

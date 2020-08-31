@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert'
 
 import '../src/styles/style.css'
 
-class UserAlert extends Component {
+class UserAlertComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -49,4 +49,4 @@ class UserAlert extends Component {
     }
 }
 
-export default UserAlert;
+export default UserAlertComponent;

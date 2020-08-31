@@ -1,8 +1,8 @@
 import React, {Component} from "react";
-import UserDataService from "../../services/user.service";
+import UserDataService from "../../services/UserDataService";
 import {Link} from "react-router-dom";
 import Table from "react-bootstrap/Table";
-import UserAlert from "../../user-alert";
+import UserAlertComponent from "../../UserAlertComponent";
 
 export default class UsersListComponent extends Component {
     constructor(props) {
@@ -231,9 +231,9 @@ export default class UsersListComponent extends Component {
                                 </button>
                             </div>
 
-                        ) : <UserAlert ref={this.alert}/>
+                        ) : <UserAlertComponent ref={this.alert}/>
                     }
-                    <UserAlert ref={this.alert}/>
+                    <UserAlertComponent ref={this.alert}/>
                 </div>
 
                 <div className="col-md-4 selected-user">
