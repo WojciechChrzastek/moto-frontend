@@ -23,7 +23,7 @@ export default class CarsListComponent extends Component {
             searchBy: "",
             searchByPlaceholder: "Type in brand name",
             searchByMethod: "brand",
-            foundCars: 1
+            foundCars: true
         };
     }
 
@@ -89,13 +89,14 @@ export default class CarsListComponent extends Component {
         response
             .then(response => {
                 this.setState({
+                    foundCars: true,
                     cars: response.data
                 });
                 console.log(response.data);
             })
             .catch(e => {
                 console.log(e);
-                this.setState({foundCars: 0})
+                this.setState({foundCars: false})
                 if (e.response.status === 404) {
                     this.showAlert("danger", "Cars not found!", "There is no car of given data.");
                 } else {
@@ -106,7 +107,6 @@ export default class CarsListComponent extends Component {
 
     searchBy() {
         this.setState({
-            foundCars: 1,
             currentCar: null,
             currentIndex: -1
         });
@@ -187,7 +187,7 @@ export default class CarsListComponent extends Component {
 
                 <div className="col-md-8">
                     <h4>Cars List</h4>
-                    {this.state.foundCars === 1 ?
+                    {this.state.foundCars === true ?
                         (
                             <div>
                                 <Table bordered hover>
@@ -263,7 +263,7 @@ export default class CarsListComponent extends Component {
                             </div>
                         ) :
                         (
-                            this.state.foundCars === 1 ?
+                            this.state.foundCars === true ?
                                 <div>
                                     <br/>
                                     <p>Please click on a Car...</p>
