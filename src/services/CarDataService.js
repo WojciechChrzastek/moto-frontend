@@ -1,37 +1,37 @@
 import http from "../http-common";
 
 class CarDataService {
-  getAll() {
-    return http.get("/cars");
-  }
+    getAll() {
+        return http.get("/cars");
+    }
 
-  get(id) {
-    return http.get(`/cars/${id}`);
-  }
+    get(id) {
+        return http.get(`/cars/${id}`);
+    }
 
-  add(data) {
-    return http.post("/cars", data);
-  }
+    add(data) {
+        return http.post("/cars", data);
+    }
 
-  update(id, data) {
-    return http.put(`/cars/${id}`, data);
-  }
+    update(id, data) {
+        return http.put(`/cars/${id}`, data);
+    }
 
-  delete(id) {
-    return http.delete(`/cars/${id}`);
-  }
+    delete(id) {
+        return http.delete(`/cars/${id}`);
+    }
 
-  deleteAll() {
-    return http.delete(`/cars`);
-  }
+    deleteAll() {
+        return http.delete(`/cars`);
+    }
 
-  findByBrand(brand) {
-    return http.get(`/cars?brandname=${brand}`);
-  }
+    findByBrand(brand) {
+        return http.get(`/cars?brandname=${brand}`);
+    }
 
-  findByModel(model) {
-    return http.get(`/cars?modelname=${model}`);
-  }
+    findByModel(model) {
+        return http.get(`/cars?modelname=${model}`);
+    }
 
 }
 
