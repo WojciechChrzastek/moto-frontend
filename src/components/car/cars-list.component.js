@@ -20,8 +20,9 @@ export default class CarsListComponent extends Component {
             data: [],
             currentCar: null,
             currentIndex: -1,
-            searchBy: null,
+            searchBy: "",
             searchByPlaceholder: "Type in brand name",
+            searchByMethod: "brand",
             foundCars: 1
         };
     }
@@ -84,54 +85,56 @@ export default class CarsListComponent extends Component {
             )
     }
 
+    processResponse(response) {
+        response
+            .then(response => {
+                this.setState({
+                    cars: response.data
+                });
+                console.log(response.data);
+            })
+            .catch(e => {
+                console.log(e);
+                this.setState({foundCars: 0})
+                if (e.response.status === 404) {
+                    this.showAlert("danger", "Cars not found!", "There is no car of given data.");
+                } else {
+                    this.showAlert("danger", "Cars not found!", "Something went wrong.");
+                }
+            });
+    }
+
     searchBy() {
         this.setState({
             foundCars: 1,
             currentCar: null,
             currentIndex: -1
         });
-        this.state.searchByPlaceholder === "Type in brand name"
-            ? CarDataService.findByBrand(this.state.searchBy)
-                .then(response => {
-                    this.setState({
-                        cars: response.data
-                    });
-                    console.log(response.data);
-                })
-                .catch(e => {
-                    console.log(e);
-                    this.setState({foundCars: 0})
-                    if (e.response.status === 404) {
-                        this.showAlert("danger", "Cars not found!", "There is no car of given data.");
-                    } else {
-                        this.showAlert("danger", "Cars not found!", "Something went wrong.");
-                    }
-                })
-            : CarDataService.findByModel(this.state.searchBy)
-                .then(response => {
-                    this.setState({
-                        cars: response.data
-                    });
-                    console.log(response.data);
-                })
-                .catch(e => {
-                    console.log(e);
-                    this.setState({foundCars: 0})
-                    if (e.response.status === 404) {
-                        this.showAlert("danger", "Cars not found!", "There is no car of given data.");
-                    } else {
-                        this.showAlert("danger", "Cars not found!", "Something went wrong.");
-                    }
-                });
+        switch (this.state.searchByMethod) {
+            case 'brand':
+                this.processResponse(CarDataService.findByBrand(this.state.searchBy))
+                break;
+            case 'model':
+                this.processResponse(CarDataService.findByModel(this.state.searchBy))
+                break;
+            default:
+                break;
+        }
     }
 
     handleSearchByChange(event) {
         switch (event.target.value) {
             case "brand":
-                this.setState({searchByPlaceholder: "Type in brand name"});
+                this.setState({
+                    searchByPlaceholder: "Type in brand name",
+                    searchByMethod: "brand"
+                });
                 break;
             case "model":
-                this.setState({searchByPlaceholder: "Type in model name"});
+                this.setState({
+                    searchByPlaceholder: "Type in model name",
+                    searchByMethod: "model"
+                });
                 break;
             default :
                 break;
