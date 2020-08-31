@@ -126,7 +126,16 @@ export default class CarsListComponent extends Component {
     }
 
     handleSearchByChange(event) {
-        this.setState({searchByPlaceholder: event.target.value});
+        switch (event.target.value) {
+            case "brand":
+                this.setState({searchByPlaceholder: "Type in brand name"});
+                break;
+            case "model":
+                this.setState({searchByPlaceholder: "Type in model name"});
+                break;
+            default :
+                break;
+        }
     }
 
     toggleClass() {
@@ -153,8 +162,8 @@ export default class CarsListComponent extends Component {
                     </div>
                     <select className="custom-select col-md-2" id="search-bar-selector"
                             value={this.state.value} onChange={this.handleSearchByChange}>
-                        <option value="Type in brand name">Brand</option>
-                        <option value="Type in model name">Model</option>
+                        <option value="brand">Brand</option>
+                        <option value="model">Model</option>
                     </select>
                     <input
                         type="text"
