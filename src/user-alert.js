@@ -6,14 +6,12 @@ import '../src/styles/style.css'
 class UserAlert extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             visible: this.props.visible,
             variant: this.props.variant,
             heading: this.props.heading,
             message: this.props.message
         };
-
     }
 
     setMessage = (message) => {
