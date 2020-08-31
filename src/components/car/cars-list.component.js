@@ -20,7 +20,7 @@ export default class CarsListComponent extends Component {
             data: [],
             currentCar: null,
             currentIndex: -1,
-            searchBy: "",
+            searchBy: null,
             searchByPlaceholder: "Type in brand name",
             foundCars: 1
         };
@@ -190,7 +190,7 @@ export default class CarsListComponent extends Component {
                                     <tbody>
                                     {cars && cars.map((car, index) => (
                                         <tr key={car.id}
-                                            className={(index === currentIndex ? "table-info" : "")}
+                                            className={(index === currentIndex ? "table-info" : null)}
                                             onClick={() => this.setActiveCar(car, index)}
                                         >
                                             <td>{car.id}</td>
@@ -257,7 +257,7 @@ export default class CarsListComponent extends Component {
                                     <p>Please click on a Car...</p>
                                 </div>
                                 :
-                                ""
+                                null
                         )
                     }
                 </div>
