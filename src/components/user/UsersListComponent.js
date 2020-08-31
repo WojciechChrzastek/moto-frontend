@@ -154,10 +154,10 @@ export default class UsersListComponent extends Component {
 
     showAlert(variant, heading, message) {
         console.log(message);
+        this.alert.current.setVisible(true);
         this.alert.current.setVariant(variant);
         this.alert.current.setHeading(heading);
         this.alert.current.setMessage(message);
-        this.alert.current.setVisible(true);
     }
 
     render() {
