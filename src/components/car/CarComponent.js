@@ -115,6 +115,10 @@ export default class CarComponent extends Component {
             )
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+    }
+
     showAlert(variant, heading, message) {
         console.log(message);
         this.alert.current.setVisible(true);
@@ -125,66 +129,67 @@ export default class CarComponent extends Component {
 
     render() {
         const {currentCar} = this.state;
-
         return (
             <div className="edit-car-form">
                 <h1 className="CarHeader">Car</h1>
-                <form>
+                <form className="submit-form" onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="brand">Brand</label>
+                        <label htmlFor="brandname">Brand</label>
                         <input
-                            type="text"
                             className="form-control"
-                            id="title"
+                            name="brandname"
+                            type="text"
+                            required
                             value={currentCar.brandname}
                             onChange={this.onChangeBrand}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="model">Model</label>
+                        <label htmlFor="modelname">Model</label>
                         <input
-                            type="text"
                             className="form-control"
-                            id="model"
+                            name="modelname"
+                            type="text"
+                            required
                             value={currentCar.modelname}
                             onChange={this.onChangeModel}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="model">Year</label>
+                        <label htmlFor="manufactureyear">Year</label>
                         <input
-                            type="text"
                             className="form-control"
-                            id="year"
+                            name="manufactureyear"
+                            required
+                            type="number" min="1901" max="2155" step="1"
                             value={currentCar.manufactureyear}
-                            onChange={this.onChangeYear}
-                        />
+                            onChange={this.onChangeYear}/>
+                        <small className="form-text text-muted">
+                            Please provide a date in the range from 1901 to 2155.
+                        </small>
+
                     </div>
                 </form>
-
                 <button
                     className="btn btn-sm btn-danger mr-3"
+                    type="submit"
                     onClick={this.deleteCar}
                 >
                     Delete
                 </button>
-
                 <button
-                    type="submit"
                     className="btn btn-sm btn-primary"
+                    type="submit"
                     onClick={this.updateCar}
                 >
                     Update
                 </button>
-
                 <Link to="/cars-list">
                     <button className="btn btn-sm btn-info float-right">
                         Return to cars list
                     </button>
                 </Link>
-
                 <UserAlertComponent ref={this.alert}/>
-
             </div>
         );
     }

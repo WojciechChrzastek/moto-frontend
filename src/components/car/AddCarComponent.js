@@ -94,16 +94,14 @@ export default class AddCarComponent extends Component {
 
     render() {
         return (
-            <div className="AddCar">
+            <div className="add-car-form">
                 <h1 className="AddCarHeader">Add car</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>
-
-                    <div className="form-group" id="brandname">
+                    <div className="form-group">
                         <label htmlFor="brandname">Brand</label>
                         <input
                             className="form-control"
                             name="brandname"
-                            id="brandname"
                             type="text"
                             placeholder="Enter brand"
                             autoFocus
@@ -111,26 +109,22 @@ export default class AddCarComponent extends Component {
                             value={this.state.brandname}
                             onChange={this.onChangeBrand}/>
                     </div>
-
-                    <div className="form-group" id="modelname">
+                    <div className="form-group">
                         <label htmlFor="modelname">Model</label>
                         <input
                             className="form-control"
                             name="modelname"
-                            id="modelname"
                             type="text"
                             placeholder="Enter model"
                             required
                             value={this.state.modelname}
                             onChange={this.onChangeModel}/>
                     </div>
-
-                    <div className="form-group" id="modelname">
+                    <div className="form-group">
                         <label htmlFor="manufactureyear">Year</label>
                         <input
                             className="form-control"
                             name="manufactureyear"
-                            id="manufactureyear"
                             type="number" min="1901" max="2155" step="1"
                             placeholder="Enter manufacture year"
                             required
@@ -140,7 +134,6 @@ export default class AddCarComponent extends Component {
                             Please provide a date in the range from 1901 to 2155.
                         </small>
                     </div>
-
                     <button
                         onClick={this.addCar}
                         className="btn btn-primary"
@@ -149,7 +142,6 @@ export default class AddCarComponent extends Component {
                     </button>
                 </form>
                 <UserAlertComponent ref={this.alert}/>
-
             </div>
         );
     }
