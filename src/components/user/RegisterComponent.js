@@ -66,6 +66,8 @@ export default class RegisterComponent extends Component {
                         this.showAlert("danger", "User not registered!", "User with this username/email already exists.");
                     } else if (error.response.status === 406) {
                         this.showAlert("danger", "User not registered!", "Please fill in all fields.");
+                    } else if (error.response.status === 422) {
+                        this.showAlert("danger", "User not registered!", "Please provide a valid email.");
                     } else {
                         this.showAlert("danger", "User not registered!", "Something went wrong.");
                     }
