@@ -115,6 +115,10 @@ export default class UserComponent extends Component {
             )
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+    }
+
     showAlert(variant, heading, message) {
         console.log(message);
         this.alert.current.setVisible(true);
@@ -125,67 +129,68 @@ export default class UserComponent extends Component {
 
     render() {
         const {currentUser} = this.state;
-
         return (
             <div className="edit-user-form">
-                <h1 className="UserHeader">User</h1>
-                <form>
+                <h1 className="user-header">User</h1>
+                <form className="submit-form" onSubmit={this.handleSubmit}>
                     <div className="form-group">
-                        <label htmlFor="brand">Username</label>
+                        <label htmlFor="username">Username</label>
                         <input
-                            type="text"
                             className="form-control"
-                            id="username"
+                            name="username"
+                            type="text"
+                            required
                             value={currentUser.username}
                             onChange={this.onChangeUsername}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="model">Email</label>
+                        <label htmlFor="email">Email</label>
                         <input
-                            type="text"
                             className="form-control"
-                            id="email"
+                            name="email"
+                            type="email"
+                            required
                             value={currentUser.email}
-                            onChange={this.onChangeEmail}
-                        />
+                            onChange={this.onChangeEmail}/>
+                        <small className="form-text text-muted">
+                            Please provide a valid email address.
+                        </small>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="model">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input
-                            type="text"
                             className="form-control"
-                            id="password"
+                            name="password"
+                            type="password"
+                            required
                             value={currentUser.password}
                             onChange={this.onChangePassword}
                         />
                     </div>
                 </form>
-
                 <button
                     className="btn btn-sm btn-danger mr-3"
+                    type="submit"
                     onClick={this.deleteUser}
                 >
                     Delete
                 </button>
-
                 <button
-                    type="submit"
                     className="btn btn-sm btn-primary"
+                    type="submit"
                     onClick={this.updateUser}
                 >
                     Update
                 </button>
-
                 <Link to="/users-list">
                     <button className="btn btn-sm btn-info float-right">
                         Return to users list
                     </button>
                 </Link>
-
                 <UserAlertComponent ref={this.alert}/>
-
             </div>
         );
     }
+
 }

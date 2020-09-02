@@ -156,7 +156,6 @@ export default class CarsListComponent extends Component {
 
     render() {
         const {searchByPlaceholder, cars, currentCar, currentIndex} = this.state;
-
         return (
             <div className="list row cars-list">
                 <div className="input-group mb-3 col-md-8">

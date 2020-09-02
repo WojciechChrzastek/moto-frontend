@@ -70,16 +70,14 @@ export default class LoginComponent extends Component {
 
     render() {
         return (
-            <div className="Login">
-                <h1 className="LoginHeader">Login</h1>
+            <div className="login-form">
+                <h1 className="login-header">Login</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>
-
-                    <div className="form-group" id="username">
+                    <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
                             className="form-control"
                             name="username"
-                            id="username"
                             type="text"
                             placeholder="Enter username"
                             autoFocus
@@ -87,20 +85,17 @@ export default class LoginComponent extends Component {
                             value={this.state.username}
                             onChange={this.onChangeUsername}/>
                     </div>
-
-                    <div className="form-group" id="password">
+                    <div className="form-group">
                         <label htmlFor="password">Password</label>
                         <input
                             className="form-control"
                             name="password"
-                            id="password"
                             type="password"
                             placeholder="Enter password"
                             required
                             value={this.state.password}
                             onChange={this.onChangePassword}/>
                     </div>
-
                     <button
                         onClick={this.logUser}
                         className="btn btn-primary"

@@ -223,7 +223,6 @@ export default class UsersListComponent extends Component {
                                     ))}
                                     </tbody>
                                 </Table>
-
                                 <button
                                     className="btn btn-sm btn-danger rmv-all-btn"
                                     onClick={this.deleteAllUsers}
@@ -288,4 +287,5 @@ export default class UsersListComponent extends Component {
             </div>
         );
     }
+
 }

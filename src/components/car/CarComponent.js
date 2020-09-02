@@ -131,7 +131,7 @@ export default class CarComponent extends Component {
         const {currentCar} = this.state;
         return (
             <div className="edit-car-form">
-                <h1 className="CarHeader">Car</h1>
+                <h1 className="car-header">Car</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="brandname">Brand</label>

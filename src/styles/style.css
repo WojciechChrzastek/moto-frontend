@@ -1,4 +1,4 @@
-.Register, .add-car-form, .list, .Login {
+.add-car-form, .list {
     padding: 20px 0 20px 0;
 }
 
@@ -6,17 +6,17 @@
     margin: 0 0 30px 0;
 }
 
-.Register Form, .edit-car-form, .add-car-form Form, .edit-user-form, .Login Form {
+.register-form, .edit-car-form, .add-car-form, .edit-user-form, .login-form {
     margin: 0 auto;
     max-width: 320px;
 }
 
-.Register .btn, .add-car-form .btn, .Login .btn {
+.register-form .btn, .add-car-form .btn, .login-form .btn {
     display: block;
     width: 100%;
 }
 
-.RegisterHeader, .CarHeader, .AddCarHeader, .UserHeader, .LoginHeader {
+.register-header, .car-header, .add-car-header, .user-header, .login-header {
     margin: 0 auto;
     max-width: 320px;
     padding: 0 0 20px;

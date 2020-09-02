@@ -98,16 +98,14 @@ export default class RegisterComponent extends Component {
 
     render() {
         return (
-            <div className="Register">
-                <h1 className="RegisterHeader">Register</h1>
+            <div className="register-form">
+                <h1 className="register-header">Register</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>
-
-                    <div className="form-group" id="username">
+                    <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input
                             className="form-control"
                             name="username"
-                            id="username"
                             type="text"
                             placeholder="Enter username"
                             autoFocus
@@ -115,26 +113,11 @@ export default class RegisterComponent extends Component {
                             value={this.state.username}
                             onChange={this.onChangeUsername}/>
                     </div>
-
-                    <div className="form-group" id="password">
-                        <label htmlFor="password">Password</label>
-                        <input
-                            className="form-control"
-                            name="password"
-                            id="password"
-                            type="password"
-                            placeholder="Enter password"
-                            required
-                            value={this.state.password}
-                            onChange={this.onChangePassword}/>
-                    </div>
-
-                    <div className="form-group" id="email">
+                    <div className="form-group">
                         <label htmlFor="email">Email</label>
                         <input
                             className="form-control"
                             name="email"
-                            id="email"
                             type="email"
                             placeholder="Enter email"
                             required
@@ -144,7 +127,17 @@ export default class RegisterComponent extends Component {
                             Please provide a valid email address.
                         </small>
                     </div>
-
+                    <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input
+                            className="form-control"
+                            name="password"
+                            type="password"
+                            placeholder="Enter password"
+                            required
+                            value={this.state.password}
+                            onChange={this.onChangePassword}/>
+                    </div>
                     <button
                         onClick={this.saveUser}
                         className="btn btn-primary"

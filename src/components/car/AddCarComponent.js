@@ -95,7 +95,7 @@ export default class AddCarComponent extends Component {
     render() {
         return (
             <div className="add-car-form">
-                <h1 className="AddCarHeader">Add car</h1>
+                <h1 className="add-car-header">Add car</h1>
                 <form className="submit-form" onSubmit={this.handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="brandname">Brand</label>
