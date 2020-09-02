@@ -10,7 +10,7 @@ export default class AddCarComponent extends Component {
         this.onChangeBrand = this.onChangeBrand.bind(this);
         this.onChangeModel = this.onChangeModel.bind(this);
         this.onChangeYear = this.onChangeYear.bind(this);
-        this.saveCar = this.saveCar.bind(this);
+        this.addCar = this.addCar.bind(this);
         this.newCar = this.newCar.bind(this);
 
         this.state = {
@@ -39,7 +39,7 @@ export default class AddCarComponent extends Component {
         });
     }
 
-    saveCar() {
+    addCar() {
         const data = {
             brandname: this.state.brandname,
             modelname: this.state.modelname,
@@ -142,7 +142,7 @@ export default class AddCarComponent extends Component {
                     </div>
 
                     <button
-                        onClick={this.saveCar}
+                        onClick={this.addCar}
                         className="btn btn-primary"
                         type="submit"
                     >Add car
