@@ -85,13 +85,13 @@ export default class UserComponent extends Component {
             .catch(
                 error => {
                     if (error.response.status === 406) {
-                        this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                        this.showAlert("danger", "User not updated!", "Please fill in all fields.");
                     } else if (error.response.status === 422) {
-                        this.showAlert("danger", "Invalid email format.", "Please provide a valid email.");
+                        this.showAlert("danger", "User not updated!", "Please provide a valid email.");
                     } else if (error.response.status === 404) {
                         this.showAlert("danger", "User not updated!", "Selected user has not been found.");
                     } else if (error.response.status === 409) {
-                        this.showAlert("danger", "User not registered!", "User with this username/email already exists.");
+                        this.showAlert("danger", "User not updated!", "User with this username/email already exists.");
                     } else {
                         this.showAlert("danger", "User not updated!", "Something went wrong.");
                     }

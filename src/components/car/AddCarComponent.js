@@ -59,9 +59,9 @@ export default class AddCarComponent extends Component {
             .catch(
                 error => {
                     if (error.response.status === 406) {
-                        this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                        this.showAlert("danger", "Car not added!", "Please fill in all fields.");
                     } else if (error.response.status === 422) {
-                        this.showAlert("danger", "Invalid manufacture year.", "Please provide a valid car manufacture year.");
+                        this.showAlert("danger", "Car not added!", "Please provide a valid car manufacture year.");
                     } else if (error.response.status === 409) {
                         this.showAlert("danger", "Car not added!", "The car already exists in the database.");
                     } else {

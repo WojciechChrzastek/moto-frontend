@@ -85,13 +85,13 @@ export default class CarComponent extends Component {
             .catch(
                 error => {
                     if (error.response.status === 406) {
-                        this.showAlert("danger", "Insufficient data.", "Please fill in all fields.");
+                        this.showAlert("danger", "Car not updated!", "Please fill in all fields.");
                     } else if (error.response.status === 422) {
-                        this.showAlert("danger", "Invalid manufacture year.", "Please provide a valid car manufacture year.");
+                        this.showAlert("danger", "Car not updated!", "Please provide a valid car manufacture year.");
                     } else if (error.response.status === 404) {
-                        this.showAlert("danger", "Car not updated!", "There is no car of given ID.");
+                        this.showAlert("danger", "Car not updated!", "Selected car has not been found.");
                     } else if (error.response.status === 409) {
-                        this.showAlert("danger", "Car not added!", "The car already exists in the database.");
+                        this.showAlert("danger", "Car not updated!", "The car already exists in the database.");
                     } else {
                         this.showAlert("danger", "Car not updated!", "Something went wrong.");
                     }
