@@ -34,8 +34,16 @@ export default class App extends Component {
         return (
             <Router>
 
-                <nav className="navbar navbar-expand navbar-dark bg-dark">
+                <nav className="navbar navbar-expand navbar-dark bg-dark fixed-top" data-toggle="affix">
                     <a href="/" className="navbar-brand m-auto">MotoApp</a>
+                    <button className="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                            data-target="#navbarNav"
+                            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="icon-bar top-bar"></span>
+                        <span className="icon-bar middle-bar"></span>
+                        <span className="icon-bar bottom-bar"></span>
+                        <span className="sr-only">Toggle navigation</span>
+                    </button>
                     <div className="navbar-nav m-auto">
                         <a className="nav-item nav-link" href="/register">Register</a>
                         <a className="nav-item nav-link" href="/login">Login</a>
